@@ -14,7 +14,7 @@ namespace KanoPlatformDetection {
         }
 
         public bool IsKanoDevice() {
-            return this.GetKanoDevice() != KanoDevice.Other;
+            return this.GetKanoDevice() != KanoDevice.Unknown;
         }
 
         public bool IsKanoPc() {
@@ -34,20 +34,12 @@ namespace KanoPlatformDetection {
 
         public KanoDevice GetKanoDevice() {
             string model = this.deviceInfo.SystemProductName;
-
-            if (KanoPlatformIds.IsKanoDeviceIdValid(model))
-                return KanoPlatformIds.GetDeviceById(model);
-
-            return KanoDevice.Other;
+            return KanoPlatformIds.GetDeviceById(model);
         }
 
         public KanoPcSku GetKanoPcSku() {
             string sku = this.deviceInfo.SystemSku;
-
-            if (KanoPlatformIds.IsKanoPcSkuValid(sku))
-                return KanoPlatformIds.GetKanoPcSkuById(sku);
-
-            return KanoPcSku.Other;
+            return KanoPlatformIds.GetKanoPcSkuById(sku);
         }
     }
 }

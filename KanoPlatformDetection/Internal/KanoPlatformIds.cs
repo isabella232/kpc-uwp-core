@@ -16,7 +16,7 @@ namespace KanoPlatformDetection.Internal {
 
         public static KanoDevice GetDeviceById(string deviceId) {
             return IsKanoDeviceIdValid(deviceId) ? 
-                KanoDeviceIds[deviceId] : KanoDevice.Other;
+                KanoDeviceIds[deviceId] : KanoDevice.Unknown;
         }
 
 
@@ -34,7 +34,7 @@ namespace KanoPlatformDetection.Internal {
 
         public static KanoPcSku GetKanoPcSkuById(string skuId) {
             return IsKanoPcSkuValid(skuId) ?
-                KanoPcSkuIds[skuId] : KanoPcSku.Other;
+                KanoPcSkuIds[skuId] : KanoPcSku.Unknown;
         }
     }
 }
