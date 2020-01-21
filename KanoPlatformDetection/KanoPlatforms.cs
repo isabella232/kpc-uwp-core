@@ -8,6 +8,7 @@
     public enum KanoPcSku {
         Unknown = 0,
         Retail = 1,
-        Education = 2
+        Education = 2,
+        KPC2001 = 3,
     }
 }

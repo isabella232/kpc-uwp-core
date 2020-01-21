@@ -23,9 +23,18 @@ namespace KanoPlatformDetection.Internal {
         private static readonly Dictionary<string, KanoPcSku> KanoPcSkuIds =
             new Dictionary<string, KanoPcSku> {
                 // The first revision of the hardware & firmware didn't set the
-                // SKU identifier and had a default value.
+                // SKU identifier and had a default value. This is the device
+                // that used the Atom chip and made by one OEM.
                 {"Default string", KanoPcSku.Retail},
-                {"EDU", KanoPcSku.Education}
+
+                // The second version of the Kano PC was made using a Celeron
+                // chip by another OEM and planned for use in education markets.
+                {"EDU", KanoPcSku.Education},
+
+                // The third version of the PC is planned to be used in all
+                // markets and uses a generic versioning scheme:
+                // KPC-<last two digits of the year><month in two digits>
+                {"KPC-2001", KanoPcSku.KPC2001}
             };
 
         public static bool IsKanoPcSkuValid(string skuId) {
