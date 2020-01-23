@@ -1,4 +1,12 @@
-﻿using System;
+﻿/**
+ * MandatoryUpdate.xaml.cs
+ * 
+ * Copyright (c) 2020 Kano Computing Ltd.
+ * License: https://opensource.org/licenses/MIT
+ */
+
+
+using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

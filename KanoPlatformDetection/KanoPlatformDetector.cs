@@ -1,4 +1,12 @@
-﻿using KanoPlatformDetection.Internal;
+﻿/**
+ * KanoPlatformDetector.cs
+ * 
+ * Copyright (c) 2020 Kano Computing Ltd.
+ * License: https://opensource.org/licenses/MIT
+ */
+
+
+using KanoPlatformDetection.Internal;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 
 

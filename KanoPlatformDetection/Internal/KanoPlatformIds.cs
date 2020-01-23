@@ -1,4 +1,12 @@
-﻿using System.Collections.Generic;
+﻿/**
+ * KanoPlatformIds.cs
+ * 
+ * Copyright (c) 2020 Kano Computing Ltd.
+ * License: https://opensource.org/licenses/MIT
+ */
+
+
+using System.Collections.Generic;
 
 
 namespace KanoPlatformDetection.Internal {

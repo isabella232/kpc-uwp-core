@@ -1,4 +1,12 @@
-﻿using System;
+﻿/**
+ * AppUpdater.cs
+ * 
+ * Copyright (c) 2020 Kano Computing Ltd.
+ * License: https://opensource.org/licenses/MIT
+ */
+
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;

@@ -1,4 +1,12 @@
-﻿using System;
+﻿/**
+ * ToastHelper.cs
+ * 
+ * Copyright (c) 2020 Kano Computing Ltd.
+ * License: https://opensource.org/licenses/MIT
+ */
+
+
+using System;
 
 
 namespace SystemNotifications {
