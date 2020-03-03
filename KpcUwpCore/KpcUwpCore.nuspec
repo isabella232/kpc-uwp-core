@@ -28,6 +28,6 @@
       src="bin\$configuration$\*.xr.xml"
       target="lib\uap10.0.17763\KpcUwpCore\"/>
     <file src="Assets\icon.png" target="images\"/>
-    <file src="..\LICENSE.md" target="licenses\"/>
+    <file src="..\LICENSE" target="licenses\"/>
   </files>
 </package>
