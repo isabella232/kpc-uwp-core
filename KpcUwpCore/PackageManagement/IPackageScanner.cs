@@ -1,5 +1,5 @@
 ﻿/**
- * KanoPlatforms.cs
+ * IPackageScanner.cs
  * 
  * Copyright (c) 2020 Kano Computing Ltd.
  * License: https://opensource.org/licenses/MIT

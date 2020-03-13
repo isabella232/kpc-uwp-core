@@ -133,6 +133,8 @@
     <Compile Include="PlatformDetection\KanoPlatforms.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemNotifications\ToastHelper.cs" />
+    <Compile Include="Display\IWindowManager.cs" />
+    <Compile Include="Display\WindowManager.cs" />
     <EmbeddedResource Include="Properties\KpcUwpCore.rd.xml" />
   </ItemGroup>
   <ItemGroup>

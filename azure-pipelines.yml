@@ -14,12 +14,14 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'x86|x64'
   buildConfiguration: 'Release'
-  appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
+  appxPackageDir: '$(Build.ArtifactStagingDirectory)\AppxPackages\\'
 
 steps:
   - task: NuGetToolInstaller@1
+    displayName: 'Install NuGet client'
 
   - task: NuGetCommand@2
+    displayName: 'Fetch project NuGet dependencies'
     inputs:
      restoreSolution: '$(solution)'
 
