@@ -6,6 +6,8 @@
  */
 
 
+using System;
+using System.Diagnostics;
 using Windows.Foundation;
 using Windows.Graphics.Display;
 using Windows.UI.ViewManagement;
@@ -17,6 +19,8 @@ namespace KanoComputing.Display {
 
         /// <summary>Gets the screen resolution in effective pixels (raw pixel 
         /// resolution with scaling applied).</summary>
+        /// <remarks>This function must be called on a thread that is associated
+        /// with a CoreWindow.</remarks>
         /// <returns>Windows.Foundation.Size with width and height</returns>
         public virtual Size GetEffectiveScreenSize() {
             DisplayInformation display = DisplayInformation.GetForCurrentView();
@@ -37,9 +41,18 @@ namespace KanoComputing.Display {
         /// <summary>Sets the window to be maximised and take up the entire screen
         /// while the taskbar remains visible. This is not fullscreen.</summary>
         /// <remarks>Calling this function only works for the next launch of the
-        /// app.</remarks>
+        /// app. Additionally, if this function is not called on a thread that is
+        /// associated with a CoreWindow, the fallback display size will be set
+        /// to Int16.MaxValue.</remarks>
         public void MaximiseWindow() {
-            Size windowSize = this.GetEffectiveScreenSize();
+            Size windowSize = new Size(Int16.MaxValue, Int16.MaxValue);
+
+            try {
+                windowSize = this.GetEffectiveScreenSize();
+            } catch (Exception e) {
+                Debug.WriteLine("WindowManager: MaximiseWindow: Caught " + e);
+            }
+
             this.SetWindowSize(windowSize);
         }
 
