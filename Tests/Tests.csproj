@@ -157,6 +157,12 @@
       <Version>1.4.0</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KpcUwpCore\KpcUwpCore.csproj">
+      <Project>{51d7caf5-b40b-4d63-85bb-2a3a18eeda42}</Project>
+      <Name>KpcUwpCore</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
