@@ -18,29 +18,69 @@ pool:
 variables:
   solution: '**/*.sln'
   buildPlatform: 'x86|x64'
-  buildConfiguration: 'Release'
+  buildPlatformStr: 'any cpu'
+  debugConfig: 'Debug'
+  releaseConfig: 'Release'
   appxPackageDir: '$(Build.ArtifactStagingDirectory)\AppxPackages\\'
 
-steps:
-  - task: NuGetToolInstaller@1
-    displayName: 'Install NuGet client'
+stages:
+- stage: Test
+  jobs:
+  - job: Test
+    steps:
+    - task: NuGetToolInstaller@1
+      displayName: 'Install NuGet client'
 
-  - task: NuGetCommand@2
-    displayName: 'Fetch project NuGet dependencies'
-    inputs:
-     restoreSolution: '$(solution)'
+    - task: NuGetCommand@2
+      displayName: 'Fetch project NuGet dependencies'
+      inputs:
+        restoreSolution: '$(solution)'
 
-  - task: VSBuild@1
-    displayName: 'Build with Visual Studio'
-    inputs:
-      platform: 'any cpu'
-      solution: '$(solution)'
-      configuration: '$(buildConfiguration)'
-      msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=CI'
+    - task: VSBuild@1
+      displayName: 'Build with Visual Studio'
+      inputs:
+        platform: '$(buildPlatformStr)'
+        solution: '$(solution)'
+        configuration: '$(debugConfig)'
+        msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=SideloadOnly'
 
-  - task: PublishBuildArtifacts@1
-    displayName: 'Publish KpcUwpCore NuGet artifacts'
-    inputs:
-      PathtoPublish: '$(Build.SourcesDirectory)/KpcUwpCore/bin/$(buildConfiguration)/Package'
-      ArtifactName: 'KpcUwpCore'
-      publishLocation: 'Container'
+    - task: VSTest@2
+      displayName: 'Run tests with Visual Studio'
+      inputs:
+        testSelector: 'testAssemblies'
+        testAssemblyVer2: |
+          **\$(debugConfig)\*.build.appxrecipe
+          !**\*TestAdapter.dll
+          !**\obj\**
+        searchFolder: '$(System.DefaultWorkingDirectory)'
+        platform: '$(buildPlatform)'
+        configuration: '$(debugConfig)'
+
+- stage: Build
+  # Remove implicit dependency on previous stage and run in parallel.
+  dependsOn: []
+  jobs:
+  - job: Build
+    steps:
+    - task: NuGetToolInstaller@1
+      displayName: 'Install NuGet client'
+
+    - task: NuGetCommand@2
+      displayName: 'Fetch project NuGet dependencies'
+      inputs:
+        restoreSolution: '$(solution)'
+
+    - task: VSBuild@1
+      displayName: 'Build with Visual Studio'
+      inputs:
+        platform: '$(buildPlatformStr)'
+        solution: '$(solution)'
+        configuration: '$(releaseConfig)'
+        msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=CI'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish KpcUwpCore NuGet artifacts'
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)/KpcUwpCore/bin/$(releaseConfig)/Package'
+        ArtifactName: 'KpcUwpCore'
+        publishLocation: 'Container'
