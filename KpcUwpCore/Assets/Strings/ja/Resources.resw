@@ -12,4 +12,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="GetUpdate.Content" xml:space="preserve">
+    <value>アップデート</value>
+    <comment>This button launches the Microsoft Store to get updates for the app</comment>
+  </data>
+  <data name="MandatoryUpdateAvailableMessage.Text" xml:space="preserve">
+    <value>必須のアップデートがあります。アプリを使い続けるにはいますぐアップデートしてください</value>
+    <comment>Message informing users that they have to update the app in order to continue using it</comment>
+  </data>
+  <data name="MandatoryUpdateAvailableTitle.Text" xml:space="preserve">
+    <value>アップデートの準備ができています</value>
+    <comment>Title of the mandatory update available message being shown</comment>
+  </data>
 </root>
