@@ -8,17 +8,17 @@
       <group id="KPCUWPCORE/ASSETS/STRINGS/EN-US/RESOURCES.RESW" datatype="resx">
         <trans-unit id="GetUpdate.Content" translate="yes" xml:space="preserve">
           <source>Get update</source>
-          <target state="new">Get update</target>
+          <target state="translated">アップデート</target>
           <note from="MultilingualBuild" annotates="source" priority="2">This button launches the Microsoft Store to get updates for the app</note>
         </trans-unit>
         <trans-unit id="MandatoryUpdateAvailableMessage.Text" translate="yes" xml:space="preserve">
           <source>A mandatory update is available for your app. Update now to continue using it.</source>
-          <target state="new">A mandatory update is available for your app. Update now to continue using it.</target>
+          <target state="translated">必須のアップデートがあります。アプリを使い続けるにはいますぐアップデートしてください。</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Message informing users that they have to update the app in order to continue using it</note>
         </trans-unit>
         <trans-unit id="MandatoryUpdateAvailableTitle.Text" translate="yes" xml:space="preserve">
           <source>Update available</source>
-          <target state="new">Update available</target>
+          <target state="translated">アップデートの準備ができています</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Title of the mandatory update available message being shown</note>
         </trans-unit>
       </group>
