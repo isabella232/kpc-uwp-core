@@ -157,11 +157,12 @@
   <ItemGroup>
     <PRIResource Include="Assets\Strings\en-US\Resources.resw" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <XliffResource Include="MultilingualResources\KpcUwpCore.ja.xlf" />
+    <PRIResource Include="Assets\Strings\ja-JP\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Include="Assets\Strings\ja\Resources.resw" />
+    <XliffResource Include="MultilingualResources\KpcUwpCore.ja-JP.xlf" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
