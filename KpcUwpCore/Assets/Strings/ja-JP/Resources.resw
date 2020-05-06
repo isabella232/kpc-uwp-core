@@ -17,7 +17,7 @@
     <comment>This button launches the Microsoft Store to get updates for the app</comment>
   </data>
   <data name="MandatoryUpdateAvailableMessage.Text" xml:space="preserve">
-    <value>必須のアップデートがあります。アプリを使い続けるにはいますぐアップデートしてください</value>
+    <value>必須のアップデートがあります。アプリを使い続けるにはいますぐアップデートしてください。</value>
     <comment>Message informing users that they have to update the app in order to continue using it</comment>
   </data>
   <data name="MandatoryUpdateAvailableTitle.Text" xml:space="preserve">
