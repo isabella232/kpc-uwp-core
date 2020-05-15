@@ -1,6 +1,6 @@
 ﻿/**
  * AppUpdater.cs
- * 
+ *
  * Copyright (c) 2020 Kano Computing Ltd.
  * License: https://opensource.org/licenses/MIT
  */
@@ -18,6 +18,7 @@ using Windows.Storage;
 namespace KanoComputing.AppUpdate {
 
     public class AppUpdater : IAppUpdater {
+
         private readonly StoreContext StoreContext = null;
         private readonly ApplicationDataContainer LocalSettings = null;
 

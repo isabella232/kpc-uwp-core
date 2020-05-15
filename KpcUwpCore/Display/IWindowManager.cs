@@ -10,7 +10,7 @@ using Windows.Foundation;
 
 
 namespace KanoComputing.Display {
-    
+
     public interface IWindowManager {
 
         Size GetEffectiveScreenSize();

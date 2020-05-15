@@ -1,6 +1,6 @@
 ﻿/**
  * KanoPlatformDetector.cs
- * 
+ *
  * Copyright (c) 2020 Kano Computing Ltd.
  * License: https://opensource.org/licenses/MIT
  */
@@ -30,12 +30,12 @@ namespace KanoComputing.PlatformDetection {
         }
 
         public bool IsKanoPcRetail() {
-            return 
+            return
                 this.IsKanoPc() &&
                 this.GetKanoPcSku() == KanoPcSku.Retail;
         }
         public bool IsKanoPcEducation() {
-            return 
+            return
                 this.IsKanoPc() &&
                 this.GetKanoPcSku() == KanoPcSku.Education;
         }

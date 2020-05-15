@@ -17,7 +17,7 @@ namespace KanoComputing.Display {
 
     public class WindowManager : IWindowManager {
 
-        /// <summary>Gets the screen resolution in effective pixels (raw pixel 
+        /// <summary>Gets the screen resolution in effective pixels (raw pixel
         /// resolution with scaling applied).</summary>
         /// <remarks>This function must be called on a thread that is associated
         /// with a CoreWindow.</remarks>
@@ -34,7 +34,7 @@ namespace KanoComputing.Display {
             double scale = display.ResolutionScale == ResolutionScale.Invalid ?
                 1 : display.RawPixelsPerViewPixel;
 
-            // Calculate the screen size in effective pixels. 
+            // Calculate the screen size in effective pixels.
             return new Size(resolution.Width / scale, resolution.Height / scale);
         }
 
@@ -58,7 +58,7 @@ namespace KanoComputing.Display {
 
         /// <summary>Sets the preffered application window size.</summary>
         /// <param name="size">Windows.Foundation.Size with width and height</param>
-        /// <remarks>Calling this function only works for the next launch of the 
+        /// <remarks>Calling this function only works for the next launch of the
         /// app.</remarks>
         public virtual void SetWindowSize(Size size) {
             ApplicationView.PreferredLaunchViewSize = size;

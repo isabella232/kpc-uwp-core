@@ -1,6 +1,6 @@
 ﻿/**
  * MandatoryUpdate.xaml.cs
- * 
+ *
  * Copyright (c) 2020 Kano Computing Ltd.
  * License: https://opensource.org/licenses/MIT
  */
@@ -17,6 +17,7 @@ namespace KanoComputing.AppUpdate {
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MandatoryUpdate : Page {
+
         public MandatoryUpdate() {
             this.InitializeComponent();
         }

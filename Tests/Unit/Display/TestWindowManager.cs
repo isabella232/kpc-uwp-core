@@ -6,12 +6,11 @@
  */
 
 
-using System.Collections.Generic;
+using KanoComputing.Display;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Collections.Generic;
 using Windows.Foundation;
-
-using KanoComputing.Display;
 
 
 namespace Tests.Unit.Display {
@@ -24,7 +23,7 @@ namespace Tests.Unit.Display {
             yield return new object[] { new Size(50, 0) };
             yield return new object[] { new Size(9001, 9001) };
         }
-        
+
         [DataTestMethod]
         [DynamicData(nameof(GetEffectiveScreenSizes), DynamicDataSourceType.Method)]
         public void TestMaximiseWindow(Size windowSize) {
@@ -32,7 +31,7 @@ namespace Tests.Unit.Display {
             // Create a mock.
             WindowManager windowManager = Mock.Of<WindowManager>();
             Mock<WindowManager> mockWindowManager = Mock.Get(windowManager);
-            
+
             // We want to test the underlyning implementation of the function while
             // avoiding the invocation of other methods on the object.
             mockWindowManager.CallBase = true;
@@ -46,18 +45,14 @@ namespace Tests.Unit.Display {
             windowManager.MaximiseWindow();
 
             // Assert the correct calls were made.
-            mockWindowManager
-                .Verify(
-                    obj => obj.GetEffectiveScreenSize(),
-                    Times.Once,
-                    "The function is expected to use the effective screen size"
-                );
-            mockWindowManager
-                .Verify(
-                    obj => obj.SetWindowSize(windowSize),
-                    Times.Once,
-                    "The function is expected to set the effective screen size as given"
-                );
+            mockWindowManager.Verify(
+                obj => obj.GetEffectiveScreenSize(),
+                Times.Once,
+                "The function is expected to use the effective screen size");
+            mockWindowManager.Verify(
+                obj => obj.SetWindowSize(windowSize),
+                Times.Once,
+                "The function is expected to set the effective screen size as given");
         }
     }
 }

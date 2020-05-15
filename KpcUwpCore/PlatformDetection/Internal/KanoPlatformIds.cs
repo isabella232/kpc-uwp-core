@@ -1,6 +1,6 @@
 ﻿/**
  * KanoPlatformIds.cs
- * 
+ *
  * Copyright (c) 2020 Kano Computing Ltd.
  * License: https://opensource.org/licenses/MIT
  */
@@ -23,7 +23,7 @@ namespace KanoComputing.PlatformDetection.Internal {
         }
 
         public static KanoDevice GetDeviceById(string deviceId) {
-            return IsKanoDeviceIdValid(deviceId) ? 
+            return IsKanoDeviceIdValid(deviceId) ?
                 KanoDeviceIds[deviceId] : KanoDevice.Unknown;
         }
 

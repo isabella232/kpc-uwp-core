@@ -1,6 +1,6 @@
 ﻿/**
  * PackageScanner.cs
- * 
+ *
  * Copyright (c) 2020 Kano Computing Ltd.
  * License: https://opensource.org/licenses/MIT
  */
@@ -12,28 +12,25 @@ using System.Threading.Tasks;
 using Windows.System;
 
 
-namespace KanoComputing.PackageManagement
-{
-    public class PackageScanner : IPackageScanner
-    {
-        public async Task<bool> IsAppInstalledAsync(Uri protocolName, string packageFamilyName)
-        {
-            try
-            {
-                LaunchQuerySupportStatus status = 
+namespace KanoComputing.PackageManagement {
+
+    public class PackageScanner : IPackageScanner {
+
+        public async Task<bool> IsAppInstalledAsync(Uri protocolName, string packageFamilyName) {
+            try {
+                LaunchQuerySupportStatus status =
                     await Launcher.QueryUriSupportAsync(
                         protocolName, LaunchQuerySupportType.Uri, packageFamilyName);
 
                 bool appInstalled = status == LaunchQuerySupportStatus.Available;
-                
+
                 Debug.WriteLine(
-                    "PackageScanner: IsAppInstalledAsync: " + 
+                    "PackageScanner: IsAppInstalledAsync: " +
                     protocolName + " " + packageFamilyName + " " + appInstalled);
 
                 return appInstalled;
 
-            } catch (Exception e)
-            {
+            } catch (Exception e) {
                 Debug.WriteLine("PackageScanner: IsAppInstalledAsync: Error: " + e);
                 return false;
             }
