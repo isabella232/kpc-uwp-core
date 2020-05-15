@@ -179,17 +179,17 @@
     <PostBuildEvent>set NugetDir=Package
 
 echo Ensuring NuGet package directory
-cd $(SolutionDir)$(OutDir) &amp;&amp; ^
+cd $(ProjectDir)$(OutDir) &amp;&amp; ^
 if not exist %25NugetDir%25 mkdir %25NugetDir%25 &amp;&amp; ^
-cd $(SolutionDir)
+cd $(ProjectDir)
 if errorlevel 1 exit 1
 
 echo Building NuGet package
-nuget pack $(SolutionDir)$(TargetName).nuspec -OutputDirectory $(SolutionDir)$(OutDir)%25NugetDir%25\ -NonInteractive -Verbosity detailed -Properties Configuration=$(Configuration)
+nuget pack $(ProjectDir)$(TargetName).nuspec -OutputDirectory $(ProjectDir)$(OutDir)%25NugetDir%25\ -NonInteractive -Verbosity detailed -Properties Configuration=$(Configuration)
 if errorlevel 1 exit 1
 
 echo Verifying NuGet Package
-echo DISABLED: nuget verify -All $(SolutionDir)$(OutDir)%25NugetDir%25\*.nupkg
+echo DISABLED: nuget verify -All $(ProjectDir)$(OutDir)%25NugetDir%25\*.nupkg
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
