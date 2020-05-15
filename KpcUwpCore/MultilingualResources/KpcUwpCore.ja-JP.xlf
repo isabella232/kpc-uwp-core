@@ -21,6 +21,26 @@
           <target state="translated">アップデートの準備ができています</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Title of the mandatory update available message being shown</note>
         </trans-unit>
+        <trans-unit id="CheckConnection.Content" translate="yes" xml:space="preserve">
+          <source>Check connection</source>
+          <target state="new">Check connection</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">This button launches the Windows Settings app to the page that helps users connect to the Internet.</note>
+        </trans-unit>
+        <trans-unit id="NoInternetConnectionMessage.Text" translate="yes" xml:space="preserve">
+          <source>The app can't open because you are not connected to the internet. Make sure Wi-Fi is on and try again.</source>
+          <target state="new">The app can't open because you are not connected to the internet. Make sure Wi-Fi is on and try again.</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Message informing users that they have to connect to the internet in order to continue using the app.</note>
+        </trans-unit>
+        <trans-unit id="NoInternetConnectionTitle.Text" translate="yes" xml:space="preserve">
+          <source>Check your connection</source>
+          <target state="new">Check your connection</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Title of the no internet connection message being shown.</note>
+        </trans-unit>
+        <trans-unit id="Refresh.Content" translate="yes" xml:space="preserve">
+          <source>Refresh</source>
+          <target state="new">Refresh</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">This button refreshes the web page potentially after the user connected to the Internet.</note>
+        </trans-unit>
       </group>
     </body>
   </file>

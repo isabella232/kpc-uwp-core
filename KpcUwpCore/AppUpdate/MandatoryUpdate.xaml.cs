@@ -7,6 +7,7 @@
 
 
 using System;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -14,7 +15,7 @@ using Windows.UI.Xaml.Controls;
 namespace KanoComputing.AppUpdate {
 
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// This page informs users that the app requires a mandatory update
     /// </summary>
     public sealed partial class MandatoryUpdate : Page {
 
@@ -22,9 +23,9 @@ namespace KanoComputing.AppUpdate {
             this.InitializeComponent();
         }
 
-        private void OnUpdateButtonClicked(object sender, RoutedEventArgs e) {
+        private async void OnUpdateButtonClick(object sender, RoutedEventArgs e) {
             // Launch the Microsoft Store to the Downloads and Updates page.
-            _ = Windows.System.Launcher.LaunchUriAsync(
+            await Launcher.LaunchUriAsync(
                 new Uri("ms-windows-store://downloadsandupdates")
             );
         }

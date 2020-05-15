@@ -1,5 +1,5 @@
 ﻿<!--
- * MandatoryUpdate.xaml
+ * OfflinePage.xaml
  *
  * Copyright (c) 2020 Kano Computing Ltd.
  * License: https://opensource.org/licenses/MIT
@@ -7,10 +7,10 @@
 
 
 <Page
-    x:Class="KanoComputing.AppUpdate.MandatoryUpdate"
+    x:Class="KanoComputing.Network.OfflinePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:KanoComputing.AppUpdate"
+    xmlns:local="using:KanoComputing.Network"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -20,22 +20,33 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center">
         <TextBlock
-            x:Uid="MandatoryUpdateAvailableTitle"
+            x:Uid="NoInternetConnectionTitle"
             FontWeight="Normal"
             FontSize="36"
             HorizontalAlignment="Center"
             TextWrapping="WrapWholeWords"/>
         <TextBlock
-            x:Uid="MandatoryUpdateAvailableMessage"
+            x:Uid="NoInternetConnectionMessage"
             FontSize="20"
             Padding="15"
             HorizontalAlignment="Center"
             TextWrapping="WrapWholeWords"/>
-        <Button
-            x:Uid="GetUpdate"
+        <StackPanel
+            Orientation="Horizontal"
+            VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Margin="0,32,0,0"
-            FontSize="16"
-            Click="OnUpdateButtonClick"/>
+            Margin="0,32,0,0">
+            <Button
+                x:Uid="Refresh"
+                Name="RefreshButton"
+                Margin="0,0,32,0"
+                FontSize="16"
+                Click="OnRefreshButtonClick"/>
+            <Button
+                x:Uid="CheckConnection"
+                Name="CheckConnectionButton"
+                FontSize="16"
+                Click="OnCheckConnectionButtonClick"/>
+        </StackPanel>
     </StackPanel>
 </Page>

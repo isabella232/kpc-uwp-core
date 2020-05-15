@@ -131,6 +131,9 @@
     <Compile Include="AppUpdate\MandatoryUpdate.xaml.cs">
       <DependentUpon>MandatoryUpdate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Network\OfflinePage.xaml.cs">
+      <DependentUpon>OfflinePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PackageManagement\IPackageScanner.cs" />
     <Compile Include="PackageManagement\PackageScanner.cs" />
     <Compile Include="PlatformDetection\IKanoPlatformDetector.cs" />
@@ -150,6 +153,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="AppUpdate\MandatoryUpdate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Network\OfflinePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
