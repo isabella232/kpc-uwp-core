@@ -8,8 +8,10 @@
 
 using System;
 using System.Diagnostics;
+using Windows.ApplicationModel.Core;
 using Windows.Networking.Connectivity;
 using Windows.System;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -42,12 +44,15 @@ namespace KanoComputing.Network {
             this.GoBack();
         }
 
-        private void GoBack() {
-            if (this.Frame.CanGoBack) {
-                this.Frame.GoBack();
-            } else {
-                Debug.WriteLine("OfflinePage: GoBack: Cannot go back to the previous page");
-            }
+        private async void GoBack() {
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+            () => {
+                if (this.Frame.CanGoBack) {
+                    this.Frame.GoBack();
+                } else {
+                    Debug.WriteLine("OfflinePage: GoBack: Cannot go back to the previous page");
+                }
+            });
         }
 
         private async void OnCheckConnectionButtonClick(object sender, RoutedEventArgs args) {
