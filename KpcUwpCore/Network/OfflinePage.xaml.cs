@@ -8,7 +8,6 @@
 
 using System;
 using System.Diagnostics;
-using Windows.ApplicationModel.Core;
 using Windows.Networking.Connectivity;
 using Windows.System;
 using Windows.UI.Core;
@@ -29,14 +28,16 @@ namespace KanoComputing.Network {
         public OfflinePage() {
             this.InitializeComponent();
 
-            NetworkInformation.NetworkStatusChanged +=
-                new NetworkStatusChangedEventHandler(this.OnNetworkStatusChanged);
+            NetworkInformation.NetworkStatusChanged += this.OnNetworkStatusChanged;
         }
 
-        private void OnNetworkStatusChanged(object sender) {
+        private async void OnNetworkStatusChanged(object sender) {
             ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();
             if (profile != null) {
-                this.GoBack();
+                await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                () => {
+                    this.GoBack();
+                });
             }
         }
 
@@ -44,15 +45,12 @@ namespace KanoComputing.Network {
             this.GoBack();
         }
 
-        private async void GoBack() {
-            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-            () => {
-                if (this.Frame.CanGoBack) {
-                    this.Frame.GoBack();
-                } else {
-                    Debug.WriteLine("OfflinePage: GoBack: Cannot go back to the previous page");
-                }
-            });
+        private void GoBack() {
+            if (this.Frame.CanGoBack) {
+                this.Frame.GoBack();
+            } else {
+                Debug.WriteLine("OfflinePage: GoBack: Cannot go back to the previous page");
+            }
         }
 
         private async void OnCheckConnectionButtonClick(object sender, RoutedEventArgs args) {
