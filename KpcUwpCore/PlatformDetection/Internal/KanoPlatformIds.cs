@@ -41,7 +41,17 @@ namespace KanoComputing.PlatformDetection.Internal {
                 // The third version of the PC is planned to be used in all
                 // markets and uses a generic versioning scheme:
                 // KPC-<last two digits of the year><month in two digits>
-                {"KPC2002", KanoPcSku.KPC2002}
+                {"KPC2002", KanoPcSku.KPC2002},
+
+                // The forth version of the PC coincided with KPC2005JA and the
+                // image contains both English and Japanese language packs. With
+                // the only difference being in the BIOS SKU identifier.
+                {"KPC2005", KanoPcSku.KPC2005},
+
+                // The fifth version of the PC coincided with KPC2005 and the
+                // image contains both English and Japanese language packs. With
+                // the only difference being in the BIOS SKU identifier.
+                {"KPC2005JA", KanoPcSku.KPC2005JA}
             };
 
         public static bool IsKanoPcSkuValid(string skuId) {

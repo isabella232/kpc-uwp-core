@@ -18,5 +18,7 @@ namespace KanoComputing.PlatformDetection {
         Retail = 1,
         Education = 2,
         KPC2002 = 3,
+        KPC2005 = 4,
+        KPC2005JA = 5
     }
 }
