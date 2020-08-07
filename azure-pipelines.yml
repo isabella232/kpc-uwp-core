@@ -1,60 +1,43 @@
-# Universal Windows Platform
-# Build a Universal Windows Platform project using Visual Studio.
-# Add steps that test and distribute an app, save build artifacts, and more:
-# https://aka.ms/yaml
+# azure-pipelines.yml
+#
+# Copyright (c) 2020 Kano Computing Ltd.
 
 
 trigger:
-  - master
+  branches:
+    include:
+    - master
 
 pr:
   branches:
     include:
-      - '*'
+    - '*'
 
 pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'x86|x64'
-  buildPlatformStr: 'any cpu'
-  debugConfig: 'Debug'
-  releaseConfig: 'Release'
-  appxPackageDir: '$(Build.ArtifactStagingDirectory)\AppxPackages\\'
+  major: 1
+  minor: 5
+  patch: $[counter(variables['major'].variables['minor'].*, 0)]
+
+# Customise the Build.BuildNumber variable with the version of the build.
+name: '$(major).$(minor).$(patch)'
+
+resources:
+  repositories:
+  - repository: templates
+    type: github
+    name: KanoComputing/azure-pipeline-templates
+    endpoint: KanoComputing
+    ref: refs/tags/1.0.3
 
 stages:
 - stage: Test
   jobs:
   - job: Test
     steps:
-    - task: NuGetToolInstaller@1
-      displayName: 'Install NuGet client'
-
-    - task: NuGetCommand@2
-      displayName: 'Fetch project NuGet dependencies'
-      inputs:
-        restoreSolution: '$(solution)'
-
-    - task: VSBuild@1
-      displayName: 'Build with Visual Studio'
-      inputs:
-        platform: '$(buildPlatformStr)'
-        solution: '$(solution)'
-        configuration: '$(debugConfig)'
-        msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=SideloadOnly'
-
-    - task: VSTest@2
-      displayName: 'Run tests with Visual Studio'
-      inputs:
-        testSelector: 'testAssemblies'
-        testAssemblyVer2: |
-          **\$(debugConfig)\*.build.appxrecipe
-          !**\*TestAdapter.dll
-          !**\obj\**
-        searchFolder: '$(System.DefaultWorkingDirectory)'
-        platform: '$(buildPlatform)'
-        configuration: '$(debugConfig)'
+    - template: steps/run-visual-studio-tests.yml@templates
 
 - stage: Build
   # Remove implicit dependency on previous stage and run in parallel.
@@ -62,25 +45,6 @@ stages:
   jobs:
   - job: Build
     steps:
-    - task: NuGetToolInstaller@1
-      displayName: 'Install NuGet client'
-
-    - task: NuGetCommand@2
-      displayName: 'Fetch project NuGet dependencies'
-      inputs:
-        restoreSolution: '$(solution)'
-
-    - task: VSBuild@1
-      displayName: 'Build with Visual Studio'
-      inputs:
-        platform: '$(buildPlatformStr)'
-        solution: '$(solution)'
-        configuration: '$(releaseConfig)'
-        msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=CI'
-
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish KpcUwpCore NuGet artifacts'
-      inputs:
-        PathtoPublish: '$(Build.SourcesDirectory)/KpcUwpCore/bin/$(releaseConfig)/Package'
-        ArtifactName: 'KpcUwpCore'
-        publishLocation: 'Container'
+    - template: steps/build-nuget-package.yml@templates
+      parameters:
+        projectName: 'KpcUwpCore'
