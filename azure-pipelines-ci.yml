@@ -1,6 +1,8 @@
-# azure-pipelines.yml
+# azure-pipelines-ci.yml
 #
 # Copyright (c) 2020 Kano Computing Ltd.
+#
+# Continuous integration pipeline for the project.
 
 
 trigger:
@@ -30,7 +32,7 @@ resources:
     type: github
     name: KanoComputing/azure-pipeline-templates
     endpoint: KanoComputing
-    ref: refs/tags/1.0.3
+    ref: refs/tags/1.0.4
 
 stages:
 - stage: Test

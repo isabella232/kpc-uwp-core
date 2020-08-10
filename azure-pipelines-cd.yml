@@ -1,0 +1,65 @@
+# azure-pipelines-cd.yml
+#
+# Copyright (c) 2020 Kano Computing Ltd.
+#
+# Continuous deployment pipeline for the project.
+
+
+trigger: none
+pr: none
+
+resources:
+  # Trigger this pipeline whenever the corresponding CI pipeline finishes
+  # successfully from the main branch.
+  pipelines:
+  - pipeline: ci
+    source: 'KpcUwpCore CI'
+    branch: master
+    trigger:
+      branches:
+        include:
+        - master
+
+  repositories:
+  - repository: templates
+    type: github
+    name: KanoComputing/azure-pipeline-templates
+    endpoint: KanoComputing
+    ref: refs/tags/1.0.4
+
+pool:
+  vmImage: 'windows-latest'
+
+stages:
+- stage: Staging
+  displayName: 'Release to Staging'
+  jobs:
+  - deployment: Staging
+    displayName: 'Release to Staging'
+    environment: 'Staging'
+    strategy:
+      runOnce:
+        preDeploy:
+          steps:
+          - template: steps/set-build-number.yml@templates
+            parameters:
+              buildNumber: '$(resources.pipeline.ci.runName)'
+        deploy:
+          steps:
+          - template: steps/release-nuget-package-staging.yml@templates
+
+- stage: Production
+  displayName: 'Release to Production'
+  jobs:
+  - deployment: Production
+    displayName: 'Release to Production'
+    environment: 'Production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - template: steps/release-nuget-package-production.yml@templates
+        on:
+          success:
+            steps:
+            - template: steps/github-tag-and-release.yml@templates
