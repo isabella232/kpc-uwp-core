@@ -1,0 +1,13 @@
+# dependabot.yml
+#
+# Copyright (c) 2020 Kano Computing Ltd.
+#
+# Automatated dependency upgrades for the project.
+
+
+version: 2
+updates:
+- package-ecosystem: "nuget"
+  directory: "/"
+  schedule:
+    interval: "daily"
