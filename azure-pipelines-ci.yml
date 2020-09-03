@@ -15,9 +15,6 @@ pr:
     include:
     - '*'
 
-pool:
-  vmImage: 'windows-latest'
-
 variables:
   major: 1
   minor: 5
@@ -32,7 +29,11 @@ resources:
     type: github
     name: KanoComputing/azure-pipeline-templates
     endpoint: KanoComputing
-    ref: refs/tags/1.0.4
+    ref: refs/tags/2.0.5
+
+pool:
+  vmImage: 'windows-latest'
+
 
 stages:
 - stage: Test

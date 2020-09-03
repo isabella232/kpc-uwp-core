@@ -25,41 +25,26 @@ resources:
     type: github
     name: KanoComputing/azure-pipeline-templates
     endpoint: KanoComputing
-    ref: refs/tags/1.0.4
+    ref: refs/tags/2.0.5
 
-pool:
-  vmImage: 'windows-latest'
 
 stages:
+- template: stages/release-initialisation.yml@templates
+  parameters:
+    buildNumber: '$(resources.pipeline.ci.runName)'
+
 - stage: Staging
   displayName: 'Release to Staging'
   jobs:
-  - deployment: Staging
-    displayName: 'Release to Staging'
-    environment: 'Staging'
-    strategy:
-      runOnce:
-        preDeploy:
-          steps:
-          - template: steps/set-build-number.yml@templates
-            parameters:
-              buildNumber: '$(resources.pipeline.ci.runName)'
-        deploy:
-          steps:
-          - template: steps/release-nuget-package-staging.yml@templates
+  - template: jobs/release-to-nuget.yml@templates
+    parameters:
+      environment: 'Staging'
 
 - stage: Production
   displayName: 'Release to Production'
   jobs:
-  - deployment: Production
-    displayName: 'Release to Production'
-    environment: 'Production'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - template: steps/release-nuget-package-production.yml@templates
-        on:
-          success:
-            steps:
-            - template: steps/github-tag-and-release.yml@templates
+  - template: jobs/release-to-nuget.yml@templates
+    parameters:
+      environment: 'Production'
+
+- template: stages/release-documentation.yml@templates
