@@ -1,7 +1,7 @@
 ## kpc-uwp-core
 
-[![Build Status](https://dev.azure.com/KanoComputing/Kano%20PC/_apis/build/status/KanoComputing.kpc-uwp-core?branchName=master)](https://dev.azure.com/KanoComputing/Kano%20PC/_build?definitionId=27&_a=summary)
-[![Deployment Status](https://vsrm.dev.azure.com/KanoComputing/_apis/public/Release/badge/7918f3eb-d68a-49f3-bccd-9ffe2f542c55/6/9)](https://dev.azure.com/KanoComputing/Kano%20PC/_release?definitionId=6&view=mine&_a=releases)
+[![Continuous Integration Status](https://dev.azure.com/KanoComputing/Kano%20PC/_apis/build/status/KpcUwpCore%20CI?repoName=KanoComputing%2Fkpc-uwp-core&branchName=master)](https://dev.azure.com/KanoComputing/Kano%20PC/_build/latest?definitionId=27&repoName=KanoComputing%2Fkpc-uwp-core&branchName=master)
+[![Continuous Deployment Status](https://dev.azure.com/KanoComputing/Kano%20PC/_apis/build/status/KpcUwpCore%20CD?repoName=KanoComputing%2Fkpc-uwp-core&branchName=master)](https://dev.azure.com/KanoComputing/Kano%20PC/_build/latest?definitionId=46&repoName=KanoComputing%2Fkpc-uwp-core&branchName=master)
 [![NuGet Version](https://img.shields.io/nuget/v/KanoComputing.KpcUwpCore.svg)](https://www.nuget.org/packages/KanoComputing.KpcUwpCore)
 [![License](https://img.shields.io/github/license/KanoComputing/kpc-uwp-core)](https://github.com/KanoComputing/kpc-uwp-core/blob/master/LICENSE)
 
