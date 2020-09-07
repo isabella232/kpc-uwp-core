@@ -13,7 +13,7 @@ namespace KanoComputing.PlatformDetection.Internal {
 
     public static class KanoPlatformIds {
 
-        private static readonly Dictionary<string, KanoDevice> KanoDeviceIds =
+        public static readonly Dictionary<string, KanoDevice> KanoDeviceIds =
             new Dictionary<string, KanoDevice> {
                 {"KANO-PC", KanoDevice.KanoPc}
             };
@@ -27,7 +27,7 @@ namespace KanoComputing.PlatformDetection.Internal {
                 KanoDeviceIds[deviceId] : KanoDevice.Unknown;
         }
 
-        private static readonly Dictionary<string, KanoPcSku> KanoPcSkuIds =
+        public static readonly Dictionary<string, KanoPcSku> KanoPcSkuIds =
             new Dictionary<string, KanoPcSku> {
                 // The first revision of the hardware & firmware didn't set the
                 // SKU identifier and had a default value. This is the device

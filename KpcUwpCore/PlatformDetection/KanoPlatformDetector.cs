@@ -7,18 +7,18 @@
 
 
 using KanoComputing.PlatformDetection.Internal;
-using Windows.Security.ExchangeActiveSyncProvisioning;
+using KanoComputing.Wrappers;
 
 
 namespace KanoComputing.PlatformDetection {
 
-    public sealed class KanoPlatformDetector : IKanoPlatformDetector {
+    public class KanoPlatformDetector : IKanoPlatformDetector {
 
-        private readonly EasClientDeviceInformation deviceInfo = null;
+        private readonly IKEasClientDeviceInformation deviceInfo = null;
 
-        public KanoPlatformDetector() {
+        public KanoPlatformDetector(IKEasClientDeviceInformation deviceInfo = null) {
             // TODO: Inject this dependency.
-            this.deviceInfo = new EasClientDeviceInformation();
+            this.deviceInfo = deviceInfo ?? new KEasClientDeviceInformation();
         }
 
         public bool IsKanoDevice() {
