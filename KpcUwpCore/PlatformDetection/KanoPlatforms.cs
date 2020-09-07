@@ -19,6 +19,8 @@ namespace KanoComputing.PlatformDetection {
         Education = 2,
         KPC2002 = 3,
         KPC2005 = 4,
-        KPC2005JA = 5
+        KPC2007JA = 5,
+        KPC2007 = 6,
+        KPC2010HS = 7
     }
 }
