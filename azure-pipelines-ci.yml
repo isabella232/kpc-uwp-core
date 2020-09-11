@@ -29,7 +29,7 @@ resources:
     type: github
     name: KanoComputing/azure-pipeline-templates
     endpoint: KanoComputing
-    ref: refs/tags/2.0.5
+    ref: refs/tags/2.0.6
 
 pool:
   vmImage: 'windows-latest'
@@ -38,9 +38,7 @@ pool:
 stages:
 - stage: Test
   jobs:
-  - job: Test
-    steps:
-    - template: steps/run-visual-studio-tests.yml@templates
+  - template: jobs/run-visual-studio-tests.yml@templates
 
 - stage: Build
   # Remove implicit dependency on previous stage and run in parallel.
