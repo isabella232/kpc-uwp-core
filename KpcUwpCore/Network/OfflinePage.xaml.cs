@@ -25,15 +25,20 @@ namespace KanoComputing.Network {
     /// </summary>
     public sealed partial class OfflinePage : Page {
 
-        public OfflinePage() {
-            this.InitializeComponent();
+        private readonly INetworkStatus networkStatus;
 
+        public OfflinePage() : this(null) {
+        }
+
+        public OfflinePage(INetworkStatus networkStatus = null) {
+            this.networkStatus = networkStatus ?? new NetworkStatus();
+
+            this.InitializeComponent();
             NetworkInformation.NetworkStatusChanged += this.OnNetworkStatusChanged;
         }
 
         private async void OnNetworkStatusChanged(object sender) {
-            ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();
-            if (profile != null) {
+            if (this.networkStatus.IsInternetAvailable()) {
                 await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 () => {
                     this.GoBack();

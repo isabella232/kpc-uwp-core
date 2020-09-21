@@ -131,6 +131,8 @@
     <Compile Include="AppUpdate\MandatoryUpdate.xaml.cs">
       <DependentUpon>MandatoryUpdate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Network\INetworkStatus.cs" />
+    <Compile Include="Network\NetworkStatus.cs" />
     <Compile Include="Network\OfflinePage.xaml.cs">
       <DependentUpon>OfflinePage.xaml</DependentUpon>
     </Compile>
@@ -144,8 +146,12 @@
     <Compile Include="SystemNotifications\ToastHelper.cs" />
     <Compile Include="Display\IWindowManager.cs" />
     <Compile Include="Display\WindowManager.cs" />
+    <Compile Include="Wrappers\IKConnectionProfile.cs" />
     <Compile Include="Wrappers\IKEasClientDeviceInformation.cs" />
+    <Compile Include="Wrappers\IKNetworkInformation.cs" />
+    <Compile Include="Wrappers\KConnectionProfile.cs" />
     <Compile Include="Wrappers\KEasClientDeviceInformation.cs" />
+    <Compile Include="Wrappers\KNetworkInformation.cs" />
     <EmbeddedResource Include="Properties\KpcUwpCore.rd.xml" />
   </ItemGroup>
   <ItemGroup>
