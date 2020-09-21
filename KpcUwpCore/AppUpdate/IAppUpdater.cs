@@ -14,7 +14,9 @@ namespace KanoComputing.AppUpdate {
     public interface IAppUpdater {
 
         Task<bool> IsUpdateAvailableAsync();
+
         Task<bool> IsMandatoryUpdateAvailableAsync(bool setFlag = true);
-        bool IsMandatoryUpdateAvailableFlagSet();
+        bool IsMandatoryUpdateAvailableViaFlag();
+        bool IsMandatoryUpdateFlagComputed();
     }
 }

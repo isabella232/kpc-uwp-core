@@ -16,8 +16,8 @@ pr:
     - '*'
 
 variables:
-  major: 1
-  minor: 6
+  major: 2
+  minor: 0
   patch: $[counter(variables['major'].variables['minor'].*, 0)]
 
 # Customise the Build.BuildNumber variable with the version of the build.

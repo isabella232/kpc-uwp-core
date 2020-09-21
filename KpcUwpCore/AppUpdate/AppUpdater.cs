@@ -19,6 +19,9 @@ namespace KanoComputing.AppUpdate {
 
     public class AppUpdater : IAppUpdater {
 
+        private const string FLAG_SET = "1";
+        private const string FLAG_UNSET = "0";
+
         private readonly StoreContext StoreContext = null;
         private readonly ApplicationDataContainer LocalSettings = null;
 
@@ -37,7 +40,7 @@ namespace KanoComputing.AppUpdate {
                 await this.StoreContext.GetAppAndOptionalStorePackageUpdatesAsync();
 
             bool result = (updatablePackages.Count > 0);
-            Debug.WriteLine("IsUpdateAvailableAsync: " + result);
+            Debug.WriteLine($"{this.GetType()}: IsUpdateAvailableAsync: {result}");
             return result;
         }
 
@@ -56,7 +59,7 @@ namespace KanoComputing.AppUpdate {
                 updatablePackages.Count > 0 &&
                 updatablePackages.Any(u => u.Mandatory)
             );
-            Debug.WriteLine("IsMandatoryUpdateAvailableAsync: " + result);
+            Debug.WriteLine($"{this.GetType()}: IsMandatoryUpdateAvailableAsync: {result}");
 
             // Set the mandatory updates feature flag.
             if (setFlag) {
@@ -66,18 +69,33 @@ namespace KanoComputing.AppUpdate {
         }
 
         private void SetMandatoryUpdateAvailableFlag(bool value) {
-            this.LocalSettings.Values["MANDATORY_UPDATES_AVAILABLE"] = value ? "1" : "0";
+            this.LocalSettings.Values["MANDATORY_UPDATES_AVAILABLE"] = value ? FLAG_SET : FLAG_UNSET;
         }
 
         /// <summary>
-        /// Check if the mandatory updates flag was set in local settings.
+        /// Check the result of the last execution of IsMandatoryUpdateAvailableAsync()
+        /// via the feature flag in local settings.
         /// </summary>
-        public bool IsMandatoryUpdateAvailableFlagSet() {
+        /// <remarks>
+        /// To verify that IsMandatoryUpdateAvailableAsync() had computed the value
+        /// of the flag before, use IsMandatoryUpdateFlagComputed().
+        /// </remarks>
+        public bool IsMandatoryUpdateAvailableViaFlag() {
             bool result = (
-                this.LocalSettings.Values.ContainsKey("MANDATORY_UPDATES_AVAILABLE") &&
-                this.LocalSettings.Values["MANDATORY_UPDATES_AVAILABLE"].ToString() == "1"
+                this.IsMandatoryUpdateFlagComputed() &&
+                this.LocalSettings.Values["MANDATORY_UPDATES_AVAILABLE"].ToString() == FLAG_SET
             );
-            Debug.WriteLine("IsMandatoryUpdateAvailableFlagSet: " + result);
+            Debug.WriteLine($"{this.GetType()}: IsMandatoryUpdateAvailableViaFlag: {result}");
+            return result;
+        }
+
+        /// <summary>
+        /// Check if the mandatory updates flag was computed and stored in local settings
+        /// from a previous call to IsMandatoryUpdateAvailableAsync().
+        /// </summary>
+        public bool IsMandatoryUpdateFlagComputed() {
+            bool result = this.LocalSettings.Values.ContainsKey("MANDATORY_UPDATES_AVAILABLE");
+            Debug.WriteLine($"{this.GetType()}: IsMandatoryUpdateAvailableFlagSet: {result}");
             return result;
         }
     }
