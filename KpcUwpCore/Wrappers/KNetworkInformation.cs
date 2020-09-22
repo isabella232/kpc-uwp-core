@@ -14,7 +14,8 @@ namespace KanoComputing.Wrappers {
     public class KNetworkInformation : IKNetworkInformation {
         
         public IKConnectionProfile GetInternetConnectionProfile() {
-            return new KConnectionProfile(NetworkInformation.GetInternetConnectionProfile());
+            ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();
+            return profile == null ? null : new KConnectionProfile(profile);
         }
     }
 }

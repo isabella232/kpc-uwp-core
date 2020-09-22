@@ -24,8 +24,8 @@ namespace Tests.Unit.Network {
                      typeof(NetworkStatusFixtures), DynamicDataSourceType.Method)]
         public void TestIsInternetAvailable(NetworkConnectivityLevel networkConnectivity) {
             // Setup any objects and mocks.
-            Mock<IKConnectionProfile> mockConnectionProfile = new Mock<IKConnectionProfile>();
-            Mock<IKNetworkInformation> mockNetworkInformation = new Mock<IKNetworkInformation>();
+            var mockConnectionProfile = new Mock<IKConnectionProfile>();
+            var mockNetworkInformation = new Mock<IKNetworkInformation>();
             NetworkStatus networkStatus = new NetworkStatus(mockNetworkInformation.Object);
 
             mockConnectionProfile
