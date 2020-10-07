@@ -25,17 +25,49 @@
             FontSize="36"
             HorizontalAlignment="Center"
             TextWrapping="WrapWholeWords"/>
+        <!-- This message changes depending on the PageState set. -->
         <TextBlock
+            Name="MessageText"
             x:Uid="MandatoryUpdateAvailableMessage"
             FontSize="20"
             Padding="15"
             HorizontalAlignment="Center"
             TextWrapping="WrapWholeWords"/>
-        <Button
-            x:Uid="GetUpdate"
+        <!-- Items in this panel are shown depending on the PageState set.
+             Also, its Height is set such that toggling elements does not
+             re-center everything vertically. -->
+        <StackPanel
             HorizontalAlignment="Center"
             Margin="0,32,0,0"
-            FontSize="16"
-            Click="OnUpdateButtonClick"/>
+            Height="100">
+            <Button
+                Name="UpdateButton"
+                x:Uid="GetUpdate"
+                FontSize="16"
+                HorizontalAlignment="Center"
+                Click="OnUpdateButtonClick"/>
+            <ProgressBar
+                Name="ProgressBar"
+                Maximum="1"
+                Width="250"
+                HorizontalAlignment="Center"/>
+            <StackPanel
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <Button
+                    Name="StoreButton"
+                    x:Uid="MicrosoftStore"
+                    FontSize="16"
+                    HorizontalAlignment="Center"
+                    Click="OnStoreButtonClick"/>
+                <Button
+                    Name="LaterButton"
+                    x:Uid="TryLater"
+                    Margin="40,0,0,0"
+                    FontSize="16"
+                    HorizontalAlignment="Center"
+                    Click="OnLaterButtonClick"/>
+            </StackPanel>
+        </StackPanel>
     </StackPanel>
 </Page>

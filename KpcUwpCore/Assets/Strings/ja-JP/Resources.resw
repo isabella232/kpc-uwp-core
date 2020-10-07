@@ -12,31 +12,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GetUpdate.Content" xml:space="preserve">
+  <data name="GetUpdate/Content" xml:space="preserve">
     <value>アップデートする</value>
-    <comment>This button launches the Microsoft Store to get updates for the app</comment>
+    <comment>This button starts the process of downloading and installing updates for the app.</comment>
   </data>
-  <data name="MandatoryUpdateAvailableMessage.Text" xml:space="preserve">
+  <data name="MandatoryUpdateAvailableMessage/Text" xml:space="preserve">
     <value>必須のアップデートがあります。アプリを使い続けるにはいますぐアップデートしてください。</value>
-    <comment>Message informing users that they have to update the app in order to continue using it</comment>
+    <comment>Message informing users that they have to update the app in order to continue using it.</comment>
   </data>
-  <data name="MandatoryUpdateAvailableTitle.Text" xml:space="preserve">
+  <data name="MandatoryUpdateAvailableTitle/Text" xml:space="preserve">
     <value>アップデートの準備ができています</value>
-    <comment>Title of the mandatory update available message being shown</comment>
+    <comment>Title of the mandatory update available message being shown.</comment>
   </data>
-  <data name="CheckConnection.Content" xml:space="preserve">
+  <data name="CheckConnection/Content" xml:space="preserve">
     <value>接続を確認する</value>
     <comment>This button launches the Windows Settings app to the page that helps users connect to the Internet.</comment>
   </data>
-  <data name="NoInternetConnectionMessage.Text" xml:space="preserve">
+  <data name="NoInternetConnectionMessage/Text" xml:space="preserve">
     <value>インターネットに接続していないため、アプリを開くことができません。 Wi-Fiがオンになっていることを確認して、もう一度お試しください。</value>
     <comment>Message informing users that they have to connect to the internet in order to continue using the app.</comment>
   </data>
-  <data name="NoInternetConnectionTitle.Text" xml:space="preserve">
+  <data name="NoInternetConnectionTitle/Text" xml:space="preserve">
     <value>接続を確認してください</value>
     <comment>Title of the no internet connection message being shown.</comment>
   </data>
-  <data name="Refresh.Content" xml:space="preserve">
+  <data name="Refresh/Content" xml:space="preserve">
     <value>リフレッシュする</value>
     <comment>This button refreshes the web page potentially after the user connected to the Internet.</comment>
   </data>

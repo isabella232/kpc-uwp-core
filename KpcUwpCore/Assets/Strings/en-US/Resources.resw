@@ -117,32 +117,48 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CheckConnection.Content" xml:space="preserve">
+  <data name="CheckConnection/Content" xml:space="preserve">
     <value>Check connection</value>
     <comment>This button launches the Windows Settings app to the page that helps users connect to the Internet.</comment>
   </data>
-  <data name="GetUpdate.Content" xml:space="preserve">
+  <data name="GetUpdate/Content" xml:space="preserve">
     <value>Get update</value>
-    <comment>This button launches the Microsoft Store to get updates for the app</comment>
+    <comment>This button starts the process of downloading and installing updates for the app.</comment>
   </data>
-  <data name="MandatoryUpdateAvailableMessage.Text" xml:space="preserve">
+  <data name="MandatoryUpdateAvailableMessage/Text" xml:space="preserve">
     <value>A mandatory update is available for your app. Update now to continue using it.</value>
-    <comment>Message informing users that they have to update the app in order to continue using it</comment>
+    <comment>Message informing users that they have to update the app in order to continue using it.</comment>
   </data>
-  <data name="MandatoryUpdateAvailableTitle.Text" xml:space="preserve">
+  <data name="MandatoryUpdateAvailableTitle/Text" xml:space="preserve">
     <value>Update available</value>
-    <comment>Title of the mandatory update available message being shown</comment>
+    <comment>Title of the mandatory update available message being shown.</comment>
   </data>
-  <data name="NoInternetConnectionMessage.Text" xml:space="preserve">
+  <data name="MandatoryUpdateFailedMessage/Text" xml:space="preserve">
+    <value>The update has failed to download and install this time. You can try again via the Store or later by starting the app.</value>
+    <comment>Message informing users that the app failed to update and that they have a couple of options.</comment>
+  </data>
+  <data name="MandatoryUpdateInstallingMessage/Text" xml:space="preserve">
+    <value>Updates for the app are now downloading and installing. This should only take a few minutes.</value>
+    <comment>Message informing users that the app is currently updating and should finish shortly.</comment>
+  </data>
+  <data name="MicrosoftStore/Content" xml:space="preserve">
+    <value>Update via Microsoft Store</value>
+    <comment>When updates fail to install, this button is shown to launch the Microsoft Store and retry the update.</comment>
+  </data>
+  <data name="NoInternetConnectionMessage/Text" xml:space="preserve">
     <value>The app can't open because you are not connected to the internet. Make sure Wi-Fi is on and try again.</value>
     <comment>Message informing users that they have to connect to the internet in order to continue using the app.</comment>
   </data>
-  <data name="NoInternetConnectionTitle.Text" xml:space="preserve">
+  <data name="NoInternetConnectionTitle/Text" xml:space="preserve">
     <value>Check your connection</value>
     <comment>Title of the no internet connection message being shown.</comment>
   </data>
-  <data name="Refresh.Content" xml:space="preserve">
+  <data name="Refresh/Content" xml:space="preserve">
     <value>Refresh</value>
     <comment>This button refreshes the web page potentially after the user connected to the Internet.</comment>
+  </data>
+  <data name="TryLater/Content" xml:space="preserve">
+    <value>Try again later</value>
+    <comment>When updates fail to install, this button is shown for the user to acknowledge that they can try to install the update later from the app. Once clicked, the app will close.</comment>
   </data>
 </root>
