@@ -134,11 +134,11 @@
     <comment>Title of the mandatory update available message being shown.</comment>
   </data>
   <data name="MandatoryUpdateFailedMessage/Text" xml:space="preserve">
-    <value>The update has failed to download and install this time. You can try again via the Store or later by starting the app.</value>
+    <value>The update was unable to complete. Please try again later by restarting the app or via the Store.</value>
     <comment>Message informing users that the app failed to update and that they have a couple of options.</comment>
   </data>
   <data name="MandatoryUpdateInstallingMessage/Text" xml:space="preserve">
-    <value>Updates for the app are now downloading and installing. This should only take a few minutes.</value>
+    <value>Downloading and installing updates. Please don't close the app. This should only take a few minutes.</value>
     <comment>Message informing users that the app is currently updating and should finish shortly.</comment>
   </data>
   <data name="MicrosoftStore/Content" xml:space="preserve">

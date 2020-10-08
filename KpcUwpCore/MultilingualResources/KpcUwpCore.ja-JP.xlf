@@ -42,13 +42,13 @@
           <note from="MultilingualBuild" annotates="source" priority="2">This button refreshes the web page potentially after the user connected to the Internet.</note>
         </trans-unit>
         <trans-unit id="MandatoryUpdateFailedMessage/Text" translate="yes" xml:space="preserve">
-          <source>The update has failed to download and install this time. You can try again via the Store or later by starting the app.</source>
-          <target state="new">The update has failed to download and install this time. You can try again via the Store or later by starting the app.</target>
+          <source>The update was unable to complete. Please try again later by restarting the app or via the Store.</source>
+          <target state="new">The update was unable to complete. Please try again later by restarting the app or via the Store.</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Message informing users that the app failed to update and that they have a couple of options.</note>
         </trans-unit>
         <trans-unit id="MandatoryUpdateInstallingMessage/Text" translate="yes" xml:space="preserve">
-          <source>Updates for the app are now downloading and installing. This should only take a few minutes.</source>
-          <target state="new">Updates for the app are now downloading and installing. This should only take a few minutes.</target>
+          <source>Downloading and installing updates. Please don't close the app. This should only take a few minutes.</source>
+          <target state="new">Downloading and installing updates. Please don't close the app. This should only take a few minutes.</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Message informing users that the app is currently updating and should finish shortly.</note>
         </trans-unit>
         <trans-unit id="MicrosoftStore/Content" translate="yes" xml:space="preserve">

@@ -12,7 +12,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
-using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Services.Store;
 using Windows.System;
@@ -31,25 +30,19 @@ namespace KanoComputing.AppUpdate {
     /// </summary>
     public sealed partial class MandatoryUpdate : Page {
 
-        private enum PageState {
-            UpdateAvailable,
-            UpdateInstalling,
-            UpdateFailed
-        }
-
         public MandatoryUpdate() {
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs args) {
+        protected override async void OnNavigatedTo(NavigationEventArgs args) {
             StoreContext storeContext = StoreContext.GetDefault();
 
             // If automatic updates are enabled in Microsoft Store > Settings then
             // start the process immediately. Otherwise, allow the user to start it.
             if (storeContext.CanSilentlyDownloadStorePackageUpdates) {
-                _ = this.DoUpdateAsync();
+                await this.DoUpdateAsync();
             } else {
-                this.SetPageState(PageState.UpdateAvailable);
+                VisualStateManager.GoToState(this, "UpdateAvailable", false);
             }
         }
 
@@ -69,53 +62,10 @@ namespace KanoComputing.AppUpdate {
         }
 
         /// <summary>
-        /// Change the visual representation of the page depending on its state
-        /// by hiding or updating the UI elements.
-        /// </summary>
-        /// TODO: Is there a fancy XAML way to express UI states and do away with this?
-        private void SetPageState(PageState state) {
-            ResourceLoader resources = CoreWindow.GetForCurrentThread() != null ?
-                ResourceLoader.GetForCurrentView("KpcUwpCore/Resources") :
-                ResourceLoader.GetForViewIndependentUse("KpcUwpCore/Resources");
-
-            switch (state) {
-                case PageState.UpdateAvailable: {
-                    this.MessageText.Text = resources.GetString("MandatoryUpdateAvailableMessage/Text");
-                    this.UpdateButton.Visibility = Visibility.Visible;
-                    this.ProgressBar.Visibility = Visibility.Collapsed;
-                    this.StoreButton.Visibility = Visibility.Collapsed;
-                    this.LaterButton.Visibility = Visibility.Collapsed;
-                    break;
-                }
-                case PageState.UpdateInstalling: {
-                    this.MessageText.Text = resources.GetString("MandatoryUpdateInstallingMessage/Text");
-                    this.UpdateButton.Visibility = Visibility.Collapsed;
-                    this.ProgressBar.Value = 0;
-                    this.ProgressBar.Visibility = Visibility.Visible;
-                    this.StoreButton.Visibility = Visibility.Collapsed;
-                    this.LaterButton.Visibility = Visibility.Collapsed;
-                    break;
-                }
-                case PageState.UpdateFailed: {
-                    this.MessageText.Text = resources.GetString("MandatoryUpdateFailedMessage/Text");
-                    this.UpdateButton.Visibility = Visibility.Collapsed;
-                    this.ProgressBar.Visibility = Visibility.Collapsed;
-                    this.StoreButton.Visibility = Visibility.Visible;
-                    this.LaterButton.Visibility = Visibility.Visible;
-                    break;
-                }
-                default: {
-                    Debug.WriteLine($"{this.GetType()}: SetPageState: Unhandled {state}");
-                    break;
-                }
-            }
-        }
-
-        /// <summary>
         /// Start the update process and change the UI accordingly.
         /// </summary>
         private async Task DoUpdateAsync() {
-            this.SetPageState(PageState.UpdateInstalling);
+            VisualStateManager.GoToState(this, "UpdateInstalling", false);
 
             StoreContext context = StoreContext.GetDefault();
 
@@ -177,7 +127,7 @@ namespace KanoComputing.AppUpdate {
                 IReadOnlyList<StorePackageUpdate> updates, StorePackageUpdateResult result) {
 
             if (result == null) {
-                this.SetPageState(PageState.UpdateFailed);
+                VisualStateManager.GoToState(this, "UpdateFailed", false);
                 return;
             }
 
@@ -196,7 +146,7 @@ namespace KanoComputing.AppUpdate {
                 // If the update was cancelled by the user, allow them to try again.
                 case StorePackageUpdateState.Canceled: {
                     Debug.WriteLine($"{this.GetType()}: HandleUpdateResultAsync: Update cancelled");
-                    this.SetPageState(PageState.UpdateAvailable);
+                    VisualStateManager.GoToState(this, "UpdateAvailable", false);
                     break;
                 }
                 // When the update failed for whatever reason, indicate this to
@@ -204,7 +154,7 @@ namespace KanoComputing.AppUpdate {
                 default: {
                     Debug.WriteLine($"{this.GetType()}: HandleUpdateResultAsync: " +
                         $"Update failed {result.OverallState}");
-                    this.SetPageState(PageState.UpdateFailed);
+                    VisualStateManager.GoToState(this, "UpdateFailed", false);
 
                     IEnumerable<StorePackageUpdateStatus> failedUpdates =
                         result.StorePackageUpdateStatuses.Where(

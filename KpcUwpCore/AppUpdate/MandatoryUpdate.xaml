@@ -19,54 +19,116 @@
     <StackPanel
         HorizontalAlignment="Center"
         VerticalAlignment="Center">
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="UpdateAvailable">
+                    <VisualState.Setters>
+                        <Setter
+                            Target="UpdateAvailablePanel.Visibility"
+                            Value="Visible"/>
+                        <Setter
+                            Target="UpdateInstallingPanel.Visibility"
+                            Value="Collapsed"/>
+                        <Setter
+                            Target="UpdateFailedPanel.Visibility"
+                            Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="UpdateInstalling">
+                    <VisualState.Setters>
+                        <Setter
+                            Target="UpdateAvailablePanel.Visibility"
+                            Value="Collapsed"/>
+                        <Setter
+                            Target="UpdateInstallingPanel.Visibility"
+                            Value="Visible"/>
+                        <Setter
+                            Target="UpdateFailedPanel.Visibility"
+                            Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="UpdateFailed">
+                    <VisualState.Setters>
+                        <Setter
+                            Target="UpdateAvailablePanel.Visibility"
+                            Value="Collapsed"/>
+                        <Setter
+                            Target="UpdateInstallingPanel.Visibility"
+                            Value="Collapsed"/>
+                        <Setter
+                            Target="UpdateFailedPanel.Visibility"
+                            Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <TextBlock
             x:Uid="MandatoryUpdateAvailableTitle"
-            FontWeight="Normal"
             FontSize="36"
+            FontWeight="Normal"
             HorizontalAlignment="Center"
             TextWrapping="WrapWholeWords"/>
-        <!-- This message changes depending on the PageState set. -->
-        <TextBlock
-            Name="MessageText"
-            x:Uid="MandatoryUpdateAvailableMessage"
-            FontSize="20"
-            Padding="15"
-            HorizontalAlignment="Center"
-            TextWrapping="WrapWholeWords"/>
-        <!-- Items in this panel are shown depending on the PageState set.
-             Also, its Height is set such that toggling elements does not
-             re-center everything vertically. -->
+
         <StackPanel
+            x:Name="UpdateAvailablePanel"
             HorizontalAlignment="Center"
-            Margin="0,32,0,0"
-            Height="100">
+            Margin="0,30,0,0">
+            <TextBlock
+                x:Uid="MandatoryUpdateAvailableMessage"
+                FontSize="20"
+                HorizontalAlignment="Center"
+                TextWrapping="WrapWholeWords"/>
             <Button
-                Name="UpdateButton"
                 x:Uid="GetUpdate"
+                Click="OnUpdateButtonClick"
                 FontSize="16"
                 HorizontalAlignment="Center"
-                Click="OnUpdateButtonClick"/>
+                Margin="0,40,0,0"/>
+        </StackPanel>
+
+        <StackPanel
+            x:Name="UpdateInstallingPanel"
+            HorizontalAlignment="Center"
+            Margin="0,30,0,0">
+            <TextBlock
+                x:Uid="MandatoryUpdateInstallingMessage"
+                FontSize="20"
+                HorizontalAlignment="Center"
+                TextWrapping="WrapWholeWords"/>
             <ProgressBar
-                Name="ProgressBar"
+                x:Name="ProgressBar"
+                HorizontalAlignment="Center"
                 Maximum="1"
-                Width="250"
-                HorizontalAlignment="Center"/>
+                Margin="0,50,0,0"
+                Width="250"/>
+        </StackPanel>
+
+        <StackPanel
+            x:Name="UpdateFailedPanel"
+            HorizontalAlignment="Center"
+            Margin="0,30,0,0">
+            <TextBlock
+                x:Uid="MandatoryUpdateFailedMessage"
+                FontSize="20"
+                HorizontalAlignment="Center"
+                TextWrapping="WrapWholeWords"/>
             <StackPanel
                 HorizontalAlignment="Center"
+                Margin="0,40,0,0"
                 Orientation="Horizontal">
                 <Button
-                    Name="StoreButton"
                     x:Uid="MicrosoftStore"
+                    Click="OnStoreButtonClick"
                     FontSize="16"
-                    HorizontalAlignment="Center"
-                    Click="OnStoreButtonClick"/>
+                    HorizontalAlignment="Center"/>
                 <Button
-                    Name="LaterButton"
                     x:Uid="TryLater"
-                    Margin="40,0,0,0"
+                    Click="OnLaterButtonClick"
                     FontSize="16"
                     HorizontalAlignment="Center"
-                    Click="OnLaterButtonClick"/>
+                    Margin="40,0,0,0"/>
             </StackPanel>
         </StackPanel>
     </StackPanel>
