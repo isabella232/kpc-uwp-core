@@ -1,8 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
   <file datatype="xml" source-language="en-US" target-language="ja-JP" original="KPCUWPCORE/ASSETS/STRINGS/EN-US/RESOURCES.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.6915.0" tool-company="Microsoft" />
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.6915.0" tool-company="Microsoft"/>
     </header>
     <body>
       <group id="KPCUWPCORE/ASSETS/STRINGS/EN-US/RESOURCES.RESW" datatype="resx">
@@ -43,22 +43,22 @@
         </trans-unit>
         <trans-unit id="MandatoryUpdateFailedMessage/Text" translate="yes" xml:space="preserve">
           <source>The update was unable to complete. Please try again later by restarting the app or via the Store.</source>
-          <target state="new">The update was unable to complete. Please try again later by restarting the app or via the Store.</target>
+          <target state="translated">更新を完了できませんでした。アプリを再起動するか、ストアから再試行してください。</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Message informing users that the app failed to update and that they have a couple of options.</note>
         </trans-unit>
         <trans-unit id="MandatoryUpdateInstallingMessage/Text" translate="yes" xml:space="preserve">
           <source>Downloading and installing updates. Please don't close the app. This should only take a few minutes.</source>
-          <target state="new">Downloading and installing updates. Please don't close the app. This should only take a few minutes.</target>
+          <target state="translated">アップデートをダウンロードとインストールしています。アプリを閉じないでください。これには数分しかかかりません。</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Message informing users that the app is currently updating and should finish shortly.</note>
         </trans-unit>
         <trans-unit id="MicrosoftStore/Content" translate="yes" xml:space="preserve">
           <source>Update via Microsoft Store</source>
-          <target state="new">Update via Microsoft Store</target>
+          <target state="translated">Microsoftストアからアップデートする</target>
           <note from="MultilingualBuild" annotates="source" priority="2">When updates fail to install, this button is shown to launch the Microsoft Store and retry the update.</note>
         </trans-unit>
         <trans-unit id="TryLater/Content" translate="yes" xml:space="preserve">
           <source>Try again later</source>
-          <target state="new">Try again later</target>
+          <target state="translated">あとでもう一度お試しください</target>
           <note from="MultilingualBuild" annotates="source" priority="2">When updates fail to install, this button is shown for the user to acknowledge that they can try to install the update later from the app. Once clicked, the app will close.</note>
         </trans-unit>
       </group>

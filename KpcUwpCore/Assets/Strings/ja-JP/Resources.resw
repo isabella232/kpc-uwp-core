@@ -40,4 +40,20 @@
     <value>リフレッシュする</value>
     <comment>This button refreshes the web page potentially after the user connected to the Internet.</comment>
   </data>
+  <data name="MandatoryUpdateFailedMessage/Text" xml:space="preserve">
+    <value>更新を完了できませんでした。アプリを再起動するか、ストアから再試行してください。</value>
+    <comment>Message informing users that the app failed to update and that they have a couple of options.</comment>
+  </data>
+  <data name="MandatoryUpdateInstallingMessage/Text" xml:space="preserve">
+    <value>アップデートをダウンロードとインストールしています。アプリを閉じないでください。これには数分しかかかりません。</value>
+    <comment>Message informing users that the app is currently updating and should finish shortly.</comment>
+  </data>
+  <data name="MicrosoftStore/Content" xml:space="preserve">
+    <value>Microsoftストアからアップデートする</value>
+    <comment>When updates fail to install, this button is shown to launch the Microsoft Store and retry the update.</comment>
+  </data>
+  <data name="TryLater/Content" xml:space="preserve">
+    <value>あとでもう一度お試しください</value>
+    <comment>When updates fail to install, this button is shown for the user to acknowledge that they can try to install the update later from the app. Once clicked, the app will close.</comment>
+  </data>
 </root>
