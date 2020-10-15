@@ -70,32 +70,98 @@ namespace KanoComputing.AppUpdate {
             try {
                 StoreContext context = StoreContext.GetDefault();
 
+                await this.CancelQueuedUpdatesAsync(context);
+
                 IReadOnlyList<StorePackageUpdate> updates =
                     await context.GetAppAndOptionalStorePackageUpdatesAsync();
+
+                StorePackageUpdateResult download =
+                    await this.DownloadAllUpdatesAsync(context, updates);
+                Debug.WriteLine($"{this.GetType()}: DoUpdateAsync: " +
+                    $"Download result {download.OverallState}");
+
+                // Only abort the process if the user explicitly cancelled. If there were
+                // failures, the next step *should* handle it.
+                if (download.OverallState == StorePackageUpdateState.Canceled) {
+                    VisualStateManager.GoToState(this, this.UpdateAvailableState.Name, false);
+                    return;
+                }
+
                 StorePackageUpdateResult result =
-                    await this.DownloadAndInstallAllUpdatesAsync(context, updates);
+                    await this.InstallAllUpdatesAsync(context, updates);
 
                 await this.HandleUpdateResultAsync(updates, result);
 
-            // If anything fails, go straight to the Failed state.
+                // If anything fails, go straight to the Failed state.
             } catch (Exception e) {
-                VisualStateManager.GoToState(this, this.UpdateFailedState.Name, false);
                 Debug.WriteLine($"{this.GetType()}: DoUpdateAsync: Caught {e}");
+                VisualStateManager.GoToState(this, this.UpdateFailedState.Name, false);
+            }
+        }
+
+        private async Task CancelQueuedUpdatesAsync(StoreContext storeContext) {
+            IReadOnlyList<StoreQueueItem> queuedUpdates =
+                await storeContext.GetAssociatedStoreQueueItemsAsync();
+
+            foreach (var update in queuedUpdates) {
+                Debug.WriteLine($"{this.GetType()}: CancelQueuedUpdatesAsync: " +
+                    $"Canceling {update.PackageFamilyName}");
+                await update.CancelInstallAsync();
             }
         }
 
         /// <summary>
-        /// Downloads and installs package updates in separate steps.
+        /// Downloads all package updates.
         /// </summary>
-        private async Task<StorePackageUpdateResult> DownloadAndInstallAllUpdatesAsync(
-                StoreContext storeContext, IReadOnlyList<StorePackageUpdate> updates) {
+        private async Task<StorePackageUpdateResult> DownloadAllUpdatesAsync(
+                StoreContext storeContext,
+                IReadOnlyList<StorePackageUpdate> updates) {
 
             if (updates.Count <= 0) {
-                Debug.WriteLine($"{this.GetType()}: DownloadAndInstallAllUpdatesAsync: No updates available");
+                Debug.WriteLine($"{this.GetType()}: DownloadAllUpdatesAsync: No updates available");
                 return null;
             }
             foreach (var update in updates) {
-                Debug.WriteLine($"{this.GetType()}: DownloadAndInstallAllUpdatesAsync: Update for " +
+                Debug.WriteLine($"{this.GetType()}: DownloadAllUpdatesAsync: Update for " +
+                    $"{update.Package.Id.FamilyName} to version {update.Package.Id.Version.Major}." +
+                    $"{update.Package.Id.Version.Minor}.{update.Package.Id.Version.Build}." +
+                    $"{update.Package.Id.Version.Revision} available");
+            }
+
+            // Download and install the updates and attempt to avoid
+            // asking the user for further confirmation.
+            IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus> downloadOperation;
+            downloadOperation = storeContext.CanSilentlyDownloadStorePackageUpdates ?
+                storeContext.TrySilentDownloadStorePackageUpdatesAsync(updates) :
+                storeContext.RequestDownloadStorePackageUpdatesAsync(updates);
+
+            // The Progress async method is called one time for each step in the download
+            // and installation process for each package in this request.
+            downloadOperation.Progress = async (asyncInfo, progress) => {
+                await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                () => {
+                    Debug.WriteLine($"{this.GetType()}: DownloadAllUpdatesAsync: Updating " +
+                        $"{progress.PackageFamilyName}, progress {progress.PackageDownloadProgress}");
+                    this.ProgressBar.Value = progress.PackageDownloadProgress * 0.5;
+                });
+            };
+
+            return await downloadOperation.AsTask();
+        }
+
+        /// <summary>
+        /// Downloads and installs package updates.
+        /// </summary>
+        private async Task<StorePackageUpdateResult> InstallAllUpdatesAsync(
+                StoreContext storeContext,
+                IReadOnlyList<StorePackageUpdate> updates) {
+
+            if (updates.Count <= 0) {
+                Debug.WriteLine($"{this.GetType()}: InstallAllUpdatesAsync: No updates available");
+                return null;
+            }
+            foreach (var update in updates) {
+                Debug.WriteLine($"{this.GetType()}: InstallAllUpdatesAsync: Update for " +
                     $"{update.Package.Id.FamilyName} to version {update.Package.Id.Version.Major}." +
                     $"{update.Package.Id.Version.Minor}.{update.Package.Id.Version.Build}." +
                     $"{update.Package.Id.Version.Revision} available");
@@ -113,17 +179,13 @@ namespace KanoComputing.AppUpdate {
             updateOperation.Progress = async (asyncInfo, progress) => {
                 await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 () => {
-                    Debug.WriteLine($"{this.GetType()}: DownloadAndInstallAllUpdatesAsync: Updating " +
+                    Debug.WriteLine($"{this.GetType()}: InstallAllUpdatesAsync: Updating " +
                         $"{progress.PackageFamilyName}, progress {progress.PackageDownloadProgress}");
-                    this.ProgressBar.Value = progress.PackageDownloadProgress;
+                    this.ProgressBar.Value = 0.5 + progress.PackageDownloadProgress * 0.5;
                 });
             };
 
-            StorePackageUpdateResult result = await updateOperation.AsTask();
-
-            // UX: Wait for progress bar to stabilise.
-            await Task.Delay(500);
-            return result;
+            return await updateOperation.AsTask();
         }
 
         /// <summary>
