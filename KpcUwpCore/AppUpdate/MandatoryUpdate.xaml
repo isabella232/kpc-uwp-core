@@ -22,7 +22,7 @@
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
-                <VisualState x:Name="UpdateAvailable">
+                <VisualState x:Name="UpdateAvailableState">
                     <VisualState.Setters>
                         <Setter
                             Target="UpdateAvailablePanel.Visibility"
@@ -35,7 +35,7 @@
                             Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="UpdateInstalling">
+                <VisualState x:Name="UpdateInstallingState">
                     <VisualState.Setters>
                         <Setter
                             Target="UpdateAvailablePanel.Visibility"
@@ -48,7 +48,7 @@
                             Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="UpdateFailed">
+                <VisualState x:Name="UpdateFailedState">
                     <VisualState.Setters>
                         <Setter
                             Target="UpdateAvailablePanel.Visibility"

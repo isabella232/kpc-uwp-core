@@ -42,7 +42,7 @@ namespace KanoComputing.AppUpdate {
             if (storeContext.CanSilentlyDownloadStorePackageUpdates) {
                 await this.DoUpdateAsync();
             } else {
-                VisualStateManager.GoToState(this, "UpdateAvailable", false);
+                VisualStateManager.GoToState(this, this.UpdateAvailableState.Name, false);
             }
         }
 
@@ -65,7 +65,7 @@ namespace KanoComputing.AppUpdate {
         /// Start the update process and change the UI accordingly.
         /// </summary>
         private async Task DoUpdateAsync() {
-            VisualStateManager.GoToState(this, "UpdateInstalling", false);
+            VisualStateManager.GoToState(this, this.UpdateInstallingState.Name, false);
 
             StoreContext context = StoreContext.GetDefault();
 
@@ -87,7 +87,6 @@ namespace KanoComputing.AppUpdate {
                 Debug.WriteLine($"{this.GetType()}: DownloadAndInstallAllUpdatesAsync: No updates available");
                 return null;
             }
-
             foreach (var update in updates) {
                 Debug.WriteLine($"{this.GetType()}: DownloadAndInstallAllUpdatesAsync: Update for " +
                     $"{update.Package.Id.FamilyName} to version {update.Package.Id.Version.Major}." +
@@ -127,7 +126,8 @@ namespace KanoComputing.AppUpdate {
                 IReadOnlyList<StorePackageUpdate> updates, StorePackageUpdateResult result) {
 
             if (result == null) {
-                VisualStateManager.GoToState(this, "UpdateFailed", false);
+                VisualStateManager.GoToState(this, this.UpdateFailedState.Name, false);
+                Debug.WriteLine($"{this.GetType()}: HandleUpdateResultAsync: result was null");
                 return;
             }
 
@@ -146,7 +146,7 @@ namespace KanoComputing.AppUpdate {
                 // If the update was cancelled by the user, allow them to try again.
                 case StorePackageUpdateState.Canceled: {
                     Debug.WriteLine($"{this.GetType()}: HandleUpdateResultAsync: Update cancelled");
-                    VisualStateManager.GoToState(this, "UpdateAvailable", false);
+                    VisualStateManager.GoToState(this, this.UpdateAvailableState.Name, false);
                     break;
                 }
                 // When the update failed for whatever reason, indicate this to
@@ -154,7 +154,7 @@ namespace KanoComputing.AppUpdate {
                 default: {
                     Debug.WriteLine($"{this.GetType()}: HandleUpdateResultAsync: " +
                         $"Update failed {result.OverallState}");
-                    VisualStateManager.GoToState(this, "UpdateFailed", false);
+                    VisualStateManager.GoToState(this, this.UpdateFailedState.Name, false);
 
                     IEnumerable<StorePackageUpdateStatus> failedUpdates =
                         result.StorePackageUpdateStatuses.Where(
