@@ -67,14 +67,21 @@ namespace KanoComputing.AppUpdate {
         private async Task DoUpdateAsync() {
             VisualStateManager.GoToState(this, this.UpdateInstallingState.Name, false);
 
-            StoreContext context = StoreContext.GetDefault();
+            try {
+                StoreContext context = StoreContext.GetDefault();
 
-            IReadOnlyList<StorePackageUpdate> updates =
-                await context.GetAppAndOptionalStorePackageUpdatesAsync();
-            StorePackageUpdateResult result =
-                await this.DownloadAndInstallAllUpdatesAsync(context, updates);
+                IReadOnlyList<StorePackageUpdate> updates =
+                    await context.GetAppAndOptionalStorePackageUpdatesAsync();
+                StorePackageUpdateResult result =
+                    await this.DownloadAndInstallAllUpdatesAsync(context, updates);
 
-            await this.HandleUpdateResultAsync(updates, result);
+                await this.HandleUpdateResultAsync(updates, result);
+
+            // If anything fails, go straight to the Failed state.
+            } catch (Exception e) {
+                VisualStateManager.GoToState(this, this.UpdateFailedState.Name, false);
+                Debug.WriteLine($"{this.GetType()}: DoUpdateAsync: Caught {e}");
+            }
         }
 
         /// <summary>
