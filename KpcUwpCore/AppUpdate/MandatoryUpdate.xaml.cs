@@ -18,7 +18,6 @@ using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
 
 namespace KanoComputing.AppUpdate {
@@ -32,9 +31,10 @@ namespace KanoComputing.AppUpdate {
 
         public MandatoryUpdate() {
             this.InitializeComponent();
+            this.Loaded += this.OnLoaded;
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs args) {
+        private async void OnLoaded(object sender, RoutedEventArgs e) {
             StoreContext storeContext = StoreContext.GetDefault();
 
             // If automatic updates are enabled in Microsoft Store > Settings then
