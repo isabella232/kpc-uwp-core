@@ -36,16 +36,50 @@ pool:
 
 
 stages:
-- stage: Test
+- stage:
+  displayName: 'Hello'
   jobs:
-  - template: jobs/run-visual-studio-tests.yml@templates
+  - deployment: Hello
+    environment: 'Staging'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: PowerShell@2
+            inputs:
+              targetType: 'inline'
+              script: 'Write-Host "Hello"'
 
-- stage: Build
-  # Remove implicit dependency on previous stage and run in parallel.
-  dependsOn: []
-  jobs:
-  - job: Build
+  - job: MicrosoftStoreManualValidation
+    displayName: 'Microsoft Store manual validation'
+    pool: server
+    dependsOn: [Hello]
+    timeoutInMinutes: 0
     steps:
-    - template: steps/build-nuget-package.yml@templates
-      parameters:
-        projectName: 'KpcUwpCore'
+    - task: ManualValidation@0
+      timeoutInMinutes: 0
+      inputs:
+        notifyUsers: |
+          radu@kano.me
+          tom@kano.me
+          team-systems@kano.me
+        instructions: >-
+          The release to Microsoft Store has failed. If this was due to an unusually long
+          execution and timeout, wait until the store submission has finalised and approve
+          this step. To check on the submission, login with your Work account when visiting
+          https://partner.microsoft.com/en-us/dashboard/overview
+        onTimeout: 'reject'
+
+- stage: World
+  displayName: 'World'
+  jobs:
+  - deployment: World
+    environment: 'Staging'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: PowerShell@2
+            inputs:
+              targetType: 'inline'
+              script: 'Write-Host "World"'
