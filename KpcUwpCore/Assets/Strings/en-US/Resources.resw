@@ -125,6 +125,22 @@
     <value>Get update</value>
     <comment>This button starts the process of downloading and installing updates for the app.</comment>
   </data>
+  <data name="MandatoryUpdateAvailableDialog/CloseButtonText" xml:space="preserve">
+    <value>Do it later</value>
+    <comment>Button that will close the dialog and allow the user to continue using the app for now.</comment>
+  </data>
+  <data name="MandatoryUpdateAvailableDialog/Content" xml:space="preserve">
+    <value>We no longer support this version of the app, please install the latest to continue using it. The app will automatically update next time it is started. You may experience bugs until the next version is installed.</value>
+    <comment>Primary message of the dialog shown when a mandatory update is available.</comment>
+  </data>
+  <data name="MandatoryUpdateAvailableDialog/PrimaryButtonText" xml:space="preserve">
+    <value>Update now</value>
+    <comment>Button on the dialog that will switch the app page to that of installing mandatory updates.</comment>
+  </data>
+  <data name="MandatoryUpdateAvailableDialog/Title" xml:space="preserve">
+    <value>Sorry to interrupt, please update this app</value>
+    <comment>Title of a dialog shown when apps are started for which a mandatory update is available.</comment>
+  </data>
   <data name="MandatoryUpdateAvailableMessage/Text" xml:space="preserve">
     <value>A mandatory update is available for your app. Update now to continue using it.</value>
     <comment>Message informing users that they have to update the app in order to continue using it.</comment>

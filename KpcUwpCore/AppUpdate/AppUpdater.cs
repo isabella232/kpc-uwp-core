@@ -6,13 +6,18 @@
  */
 
 
+using KanoComputing.Assets;
+using KanoComputing.Resources;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources;
 using Windows.Services.Store;
 using Windows.Storage;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 
 namespace KanoComputing.AppUpdate {
@@ -22,12 +27,16 @@ namespace KanoComputing.AppUpdate {
         private const string FLAG_SET = "1";
         private const string FLAG_UNSET = "0";
 
-        private readonly StoreContext StoreContext = null;
-        private readonly ApplicationDataContainer LocalSettings = null;
+        private readonly ResourceLoader resources = null;
+        private readonly StoreContext storeContext = null;
+        private readonly ApplicationDataContainer localSettings = null;
 
-        public AppUpdater() {
-            this.StoreContext = StoreContext.GetDefault();
-            this.LocalSettings = ApplicationData.Current.LocalSettings;
+        public AppUpdater(IResourcesHelper resources = null) {
+            this.resources = resources == null ?
+                new ResourcesHelper().GetResourceLoader(ResourceMapIds.Strings) :
+                resources.GetResourceLoader(ResourceMapIds.Strings);
+            this.storeContext = StoreContext.GetDefault();
+            this.localSettings = ApplicationData.Current.LocalSettings;
         }
 
         /// <summary>
@@ -37,11 +46,42 @@ namespace KanoComputing.AppUpdate {
             // Get the list of packages for the current app for which there
             // are updates available.
             IReadOnlyList<StorePackageUpdate> updatablePackages =
-                await this.StoreContext.GetAppAndOptionalStorePackageUpdatesAsync();
+                await this.storeContext.GetAppAndOptionalStorePackageUpdatesAsync();
 
             bool result = (updatablePackages.Count > 0);
             Debug.WriteLine($"{this.GetType()}: IsUpdateAvailableAsync: {result}");
             return result;
+        }
+
+        /// <summary>
+        /// Check the Microsoft Store if there are mandatory updates available
+        /// in which case show a dialog to the user and ask for permission to
+        /// start downloading and installing these. If the user accepts, the
+        /// app will navigate to the MandatoryUpdate page.
+        /// </summary>
+        /// <remarks>
+        /// Must be called from a UI thread after the app initially navigated
+        /// to its main page and started rendering and proccessing events.
+        /// </remarks>
+        public async Task CheckAndRequestMandatoryUpdateAsync() {
+            bool mandatoryUpdate = await this.IsMandatoryUpdateAvailableAsync();
+            if (!mandatoryUpdate)
+                return;
+
+            ContentDialog updateDialog = new ContentDialog {
+                Title = this.resources.GetString("MandatoryUpdateAvailableDialog/Title"),
+                Content = this.resources.GetString("MandatoryUpdateAvailableDialog/Content"),
+                PrimaryButtonText = this.resources.GetString("MandatoryUpdateAvailableDialog/PrimaryButtonText"),
+                CloseButtonText = this.resources.GetString("MandatoryUpdateAvailableDialog/CloseButtonText")
+            };
+            ContentDialogResult dialogResult = await updateDialog.ShowAsync();
+
+            if (dialogResult == ContentDialogResult.Primary) {
+                Frame rootFrame = Window.Current.Content as Frame;
+                if (rootFrame != null) {
+                    rootFrame.Navigate(typeof(MandatoryUpdate));
+                }
+            }
         }
 
         /// <summary>
@@ -53,7 +93,7 @@ namespace KanoComputing.AppUpdate {
             // Get the list of packages for the current app for which there
             // are updates available.
             IReadOnlyList<StorePackageUpdate> updatablePackages =
-                await this.StoreContext.GetAppAndOptionalStorePackageUpdatesAsync();
+                await this.storeContext.GetAppAndOptionalStorePackageUpdatesAsync();
 
             bool result = (
                 updatablePackages.Count > 0 &&
@@ -69,7 +109,7 @@ namespace KanoComputing.AppUpdate {
         }
 
         private void SetMandatoryUpdateAvailableFlag(bool value) {
-            this.LocalSettings.Values["MANDATORY_UPDATES_AVAILABLE"] = value ? FLAG_SET : FLAG_UNSET;
+            this.localSettings.Values["MANDATORY_UPDATES_AVAILABLE"] = value ? FLAG_SET : FLAG_UNSET;
         }
 
         /// <summary>
@@ -83,7 +123,7 @@ namespace KanoComputing.AppUpdate {
         public bool IsMandatoryUpdateAvailableViaFlag() {
             bool result = (
                 this.IsMandatoryUpdateFlagComputed() &&
-                this.LocalSettings.Values["MANDATORY_UPDATES_AVAILABLE"].ToString() == FLAG_SET
+                this.localSettings.Values["MANDATORY_UPDATES_AVAILABLE"].ToString() == FLAG_SET
             );
             Debug.WriteLine($"{this.GetType()}: IsMandatoryUpdateAvailableViaFlag: {result}");
             return result;
@@ -94,7 +134,7 @@ namespace KanoComputing.AppUpdate {
         /// from a previous call to IsMandatoryUpdateAvailableAsync().
         /// </summary>
         public bool IsMandatoryUpdateFlagComputed() {
-            bool result = this.LocalSettings.Values.ContainsKey("MANDATORY_UPDATES_AVAILABLE");
+            bool result = this.localSettings.Values.ContainsKey("MANDATORY_UPDATES_AVAILABLE");
             Debug.WriteLine($"{this.GetType()}: IsMandatoryUpdateAvailableFlagSet: {result}");
             return result;
         }

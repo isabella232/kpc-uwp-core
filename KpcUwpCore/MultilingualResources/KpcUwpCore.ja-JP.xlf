@@ -61,6 +61,26 @@
           <target state="translated">あとでもう一度お試しください</target>
           <note from="MultilingualBuild" annotates="source" priority="2">When updates fail to install, this button is shown for the user to acknowledge that they can try to install the update later from the app. Once clicked, the app will close.</note>
         </trans-unit>
+        <trans-unit id="MandatoryUpdateAvailableDialog/CloseButtonText" translate="yes" xml:space="preserve">
+          <source>Do it later</source>
+          <target state="new">Do it later</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Button that will close the dialog and allow the user to continue using the app for now.</note>
+        </trans-unit>
+        <trans-unit id="MandatoryUpdateAvailableDialog/Content" translate="yes" xml:space="preserve">
+          <source>We no longer support this version of the app, please install the latest to continue using it. The app will automatically update next time it is started. You may experience bugs until the next version is installed.</source>
+          <target state="new">We no longer support this version of the app, please install the latest to continue using it. The app will automatically update next time it is started. You may experience bugs until the next version is installed.</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Primary message of the dialog shown when a mandatory update is available.</note>
+        </trans-unit>
+        <trans-unit id="MandatoryUpdateAvailableDialog/PrimaryButtonText" translate="yes" xml:space="preserve">
+          <source>Update now</source>
+          <target state="new">Update now</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Button on the dialog that will switch the app page to that of installing mandatory updates.</note>
+        </trans-unit>
+        <trans-unit id="MandatoryUpdateAvailableDialog/Title" translate="yes" xml:space="preserve">
+          <source>Sorry to interrupt, please update this app</source>
+          <target state="new">Sorry to interrupt, please update this app</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Title of a dialog shown when apps are started for which a mandatory update is available.</note>
+        </trans-unit>
       </group>
     </body>
   </file>
