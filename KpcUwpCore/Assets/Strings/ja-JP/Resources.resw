@@ -56,4 +56,20 @@
     <value>あとでもう一度お試しください</value>
     <comment>When updates fail to install, this button is shown for the user to acknowledge that they can try to install the update later from the app. Once clicked, the app will close.</comment>
   </data>
+  <data name="MandatoryUpdateAvailableDialog/CloseButtonText" xml:space="preserve">
+    <value>後で行う</value>
+    <comment>Button that will close the dialog and allow the user to continue using the app for now.</comment>
+  </data>
+  <data name="MandatoryUpdateAvailableDialog/Content" xml:space="preserve">
+    <value>このバージョンのアプリはサポートされていません。使用し続けるために最新をインストールしてください。次回起動すると、アプリは自動的にアップデートされます。次のバージョンがインストールされるまで、バグが発生する可能性があります。</value>
+    <comment>Primary message of the dialog shown when a mandatory update is available.</comment>
+  </data>
+  <data name="MandatoryUpdateAvailableDialog/PrimaryButtonText" xml:space="preserve">
+    <value>今すぐアップデートする</value>
+    <comment>Button on the dialog that will switch the app page to that of installing mandatory updates.</comment>
+  </data>
+  <data name="MandatoryUpdateAvailableDialog/Title" xml:space="preserve">
+    <value>申し訳ありませんが、このアプリをアップデートしてください</value>
+    <comment>Title of a dialog shown when apps are started for which a mandatory update is available.</comment>
+  </data>
 </root>
