@@ -25,7 +25,7 @@ resources:
     type: github
     name: KanoComputing/azure-pipeline-templates
     endpoint: KanoComputing
-    ref: refs/tags/2.0.6
+    ref: refs/tags/3.1.0
 
 
 stages:
