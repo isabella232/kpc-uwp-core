@@ -7,11 +7,11 @@
 
 
 using Castle.Core.Internal;
+using KanoComputing.Tests.Fixtures.Resources;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tests.Fixtures.Resources;
 
 
-namespace Tests.Integration.Resources {
+namespace KanoComputing.Tests.Integration.Resources {
 
     /// <summary>
     /// Ensure that all strings have been separated in resource files,

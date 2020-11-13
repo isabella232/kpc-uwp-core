@@ -9,12 +9,12 @@
 using Castle.Core.Internal;
 using KanoComputing.Assets;
 using KanoComputing.Resources;
+using KanoComputing.Tests.Fixtures.Resources;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tests.Fixtures.Resources;
 using Windows.ApplicationModel.Resources;
 
 
-namespace Tests.Integration.Resources {
+namespace KanoComputing.Tests.Integration.Resources {
 
     [TestClass]
     public class TestResourcesHelper {

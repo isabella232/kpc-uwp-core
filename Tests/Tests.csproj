@@ -7,7 +7,7 @@
     <ProjectGuid>{3835CA07-E946-4B73-9FCB-FED2363D962B}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tests</RootNamespace>
+    <RootNamespace>KanoComputing.Tests</RootNamespace>
     <AssemblyName>Tests</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>

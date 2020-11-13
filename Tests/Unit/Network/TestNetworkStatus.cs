@@ -7,14 +7,14 @@
 
 
 using KanoComputing.Network;
+using KanoComputing.Tests.Fixtures.Network;
 using KanoComputing.Wrappers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Tests.Fixtures.Network;
 using Windows.Networking.Connectivity;
 
 
-namespace Tests.Unit.Network {
+namespace KanoComputing.Tests.Unit.Network {
 
     [TestClass]
     public class TestNetworkStatus {

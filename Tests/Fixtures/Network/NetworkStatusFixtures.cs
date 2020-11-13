@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using Windows.Networking.Connectivity;
 
 
-namespace Tests.Fixtures.Network {
+namespace KanoComputing.Tests.Fixtures.Network {
 
     public class NetworkStatusFixtures {
 

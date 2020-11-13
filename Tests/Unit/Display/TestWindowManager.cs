@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using Windows.Foundation;
 
 
-namespace Tests.Unit.Display {
+namespace KanoComputing.Tests.Unit.Display {
 
     [TestClass]
     public class TestWindowManager {

@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 
 
-namespace Tests.Unit.Wrappers {
+namespace KanoComputing.Tests.Unit.Wrappers {
 
     [TestClass]
     public class TestKEasClientDeviceInformation {
@@ -20,7 +20,7 @@ namespace Tests.Unit.Wrappers {
         public void TestSystemManufacturer() {
             string expected = "PearShapedInc";
 
-            IKEasClientDeviceInformation wrapper = new KEasClientDeviceInformation(systemManufacturer:expected);
+            IKEasClientDeviceInformation wrapper = new KEasClientDeviceInformation(systemManufacturer: expected);
             EasClientDeviceInformation easClient = new EasClientDeviceInformation();
 
             Assert.AreEqual(
@@ -35,7 +35,7 @@ namespace Tests.Unit.Wrappers {
         public void TestSystemProductName() {
             string expected = "iWrapper";
 
-            IKEasClientDeviceInformation wrapper = new KEasClientDeviceInformation(systemProductName:expected);
+            IKEasClientDeviceInformation wrapper = new KEasClientDeviceInformation(systemProductName: expected);
             EasClientDeviceInformation easClient = new EasClientDeviceInformation();
 
             Assert.AreEqual(
@@ -50,7 +50,7 @@ namespace Tests.Unit.Wrappers {
         public void TestSystemSku() {
             string expected = "TheresSomethingAskewAboutThis";
 
-            IKEasClientDeviceInformation wrapper = new KEasClientDeviceInformation(systemSku:expected);
+            IKEasClientDeviceInformation wrapper = new KEasClientDeviceInformation(systemSku: expected);
             EasClientDeviceInformation easClient = new EasClientDeviceInformation();
 
             Assert.AreEqual(

@@ -12,7 +12,7 @@ using System.Diagnostics;
 using Windows.ApplicationModel.Resources.Core;
 
 
-namespace Tests.Fixtures.Resources {
+namespace KanoComputing.Tests.Fixtures.Resources {
 
     public class ResourcesFixtures {
 

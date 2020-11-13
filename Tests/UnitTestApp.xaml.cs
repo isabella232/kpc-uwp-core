@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 
-namespace Tests {
+namespace KanoComputing.Tests {
 
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
