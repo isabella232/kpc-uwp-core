@@ -6,6 +6,7 @@
  */
 
 
+using KanoComputing.Network;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -29,12 +30,19 @@ namespace KanoComputing.AppUpdate {
     /// </summary>
     public sealed partial class MandatoryUpdate : Page {
 
-        public MandatoryUpdate() {
+        private readonly INetworkStatus network = null;
+
+        public MandatoryUpdate(INetworkStatus network = null) {
+            this.network = network ?? new NetworkStatus();
+
             this.InitializeComponent();
             this.Loaded += this.OnLoaded;
         }
 
-        private async void OnLoaded(object sender, RoutedEventArgs e) {
+        private async void OnLoaded(object sender, RoutedEventArgs args) {
+            if (!this.network.IsInternetAvailable())
+                this.Frame.Navigate(typeof(OfflinePage));
+
             StoreContext storeContext = StoreContext.GetDefault();
 
             // If automatic updates are enabled in Microsoft Store > Settings then
@@ -46,11 +54,11 @@ namespace KanoComputing.AppUpdate {
             }
         }
 
-        private async void OnUpdateButtonClick(object sender, RoutedEventArgs e) {
+        private async void OnUpdateButtonClick(object sender, RoutedEventArgs args) {
             await this.DoUpdateAsync();
         }
 
-        private async void OnStoreButtonClick(object sender, RoutedEventArgs e) {
+        private async void OnStoreButtonClick(object sender, RoutedEventArgs args) {
             // Launch the Microsoft Store to the Downloads and Updates page.
             await Launcher.LaunchUriAsync(
                 new Uri("ms-windows-store://downloadsandupdates")

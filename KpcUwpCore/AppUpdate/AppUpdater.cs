@@ -7,6 +7,7 @@
 
 
 using KanoComputing.Assets;
+using KanoComputing.Network;
 using KanoComputing.Resources;
 using System;
 using System.Collections.Generic;
@@ -27,11 +28,13 @@ namespace KanoComputing.AppUpdate {
         private const string FLAG_SET = "1";
         private const string FLAG_UNSET = "0";
 
+        private readonly INetworkStatus network = null;
         private readonly ResourceLoader resources = null;
         private readonly StoreContext storeContext = null;
         private readonly ApplicationDataContainer localSettings = null;
 
-        public AppUpdater(IResourcesHelper resources = null) {
+        public AppUpdater(INetworkStatus network = null, IResourcesHelper resources = null) {
+            this.network = network ?? new NetworkStatus();
             this.resources = resources == null ?
                 new ResourcesHelper().GetResourceLoader(ResourceMapIds.Strings) :
                 resources.GetResourceLoader(ResourceMapIds.Strings);
@@ -43,6 +46,9 @@ namespace KanoComputing.AppUpdate {
         /// Check the Microsoft Store if there are update available for the app.
         /// </summary>
         public async Task<bool> IsUpdateAvailableAsync() {
+            if (!this.network.IsInternetAvailable())
+                return false;
+
             // Get the list of packages for the current app for which there
             // are updates available.
             IReadOnlyList<StorePackageUpdate> updatablePackages =
@@ -90,6 +96,9 @@ namespace KanoComputing.AppUpdate {
         /// </summary>
         /// <param name="setFlag">(optional) Whether or not to set the feature flag.</param>
         public async Task<bool> IsMandatoryUpdateAvailableAsync(bool setFlag = true) {
+            if (!this.network.IsInternetAvailable())
+                return false;
+
             // Get the list of packages for the current app for which there
             // are updates available.
             IReadOnlyList<StorePackageUpdate> updatablePackages =
