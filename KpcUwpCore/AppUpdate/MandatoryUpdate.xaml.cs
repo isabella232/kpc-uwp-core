@@ -30,18 +30,18 @@ namespace KanoComputing.AppUpdate {
     /// </summary>
     public sealed partial class MandatoryUpdate : Page {
 
-        private readonly INetworkStatus network = null;
+        private readonly INetworkStatus network = new NetworkStatus();
 
-        public MandatoryUpdate(INetworkStatus network = null) {
-            this.network = network ?? new NetworkStatus();
-
+        public MandatoryUpdate() {
             this.InitializeComponent();
             this.Loaded += this.OnLoaded;
         }
 
         private async void OnLoaded(object sender, RoutedEventArgs args) {
-            if (!this.network.IsInternetAvailable())
+            if (!this.network.IsInternetAvailable()) {
                 this.Frame.Navigate(typeof(OfflinePage));
+                return;
+            }
 
             StoreContext storeContext = StoreContext.GetDefault();
 
