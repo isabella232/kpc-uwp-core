@@ -9,8 +9,6 @@ trigger: none
 pr: none
 
 resources:
-  # Trigger this pipeline whenever the corresponding CI pipeline finishes
-  # successfully from the main branch.
   pipelines:
   - pipeline: ci
     source: 'KpcUwpCore CI'
@@ -19,13 +17,12 @@ resources:
       branches:
         include:
         - master
-
   repositories:
   - repository: templates
     type: github
     name: KanoComputing/azure-pipeline-templates
     endpoint: KanoComputing
-    ref: refs/tags/3.1.0
+    ref: refs/tags/4.0.0
 
 
 stages:
@@ -33,12 +30,12 @@ stages:
   parameters:
     buildNumber: '$(resources.pipeline.ci.runName)'
 
-- stage: Staging
-  displayName: 'Release to Staging'
+- stage: ProductionPreview
+  displayName: 'Release to ProductionPreview'
   jobs:
   - template: jobs/release-to-nuget.yml@templates
     parameters:
-      environment: 'Staging'
+      environment: 'ProductionPreview'
 
 - stage: Production
   displayName: 'Release to Production'
